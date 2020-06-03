@@ -1,0 +1,10 @@
+.x-fav-button{
+    position: fixed !important;
+    bottom: 30px;
+    right: 15px;
+}
+
+.x-fav-button button{
+    background: #1E3C4D; /* Old browsers */
+    color: white;
+}
