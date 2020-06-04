@@ -8,7 +8,7 @@ import {AppRoutingModule} from './app.routing';
 import {NavbarModule} from './shared/navbar/navbar.module';
 import {FooterModule} from './shared/footer/footer.module';
 import {SidebarModule} from './sidebar/sidebar.module';
-import {ComponentsModule} from "./components/components.module";
+//import {MaterialModule} from './material/material.module';
 
 import {AppComponent} from './app.component';
 
@@ -16,6 +16,7 @@ import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.componen
 import {ListusersComponent} from './pages/users/listusers.component';
 import {NoimageuserPipe} from './pipes/noimageuser.pipe';
 import {FavbuttonComponent} from './components/genericos/favbutton/favbutton.component';
+import { FormusersComponent } from './pages/users/formusers.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,7 @@ import {FavbuttonComponent} from './components/genericos/favbutton/favbutton.com
         NavbarModule,
         FooterModule,
         SidebarModule,
-        ComponentsModule,
+     //   MaterialModule,
         AppRoutingModule
     ],
     declarations: [
@@ -34,7 +35,8 @@ import {FavbuttonComponent} from './components/genericos/favbutton/favbutton.com
         AdminLayoutComponent,
         ListusersComponent,
         NoimageuserPipe,
-        FavbuttonComponent
+        FavbuttonComponent,
+        FormusersComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

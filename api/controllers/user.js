@@ -45,6 +45,7 @@ function saveUser(req, res) {
         user.name = params.name;
         user.username = params.username;
         user.email = params.email;
+        user.phone = params.phone;
         user.rol = params.rol;
         user.image = null;
         User.find({
@@ -105,6 +106,7 @@ function updatePerfil(req, res) {
                 username: update.username,
                 email: update.email,
                 imagen: update.imagen,
+                phone: update.phone,
                 password: password
             };
             User.findByIdAndUpdate(userId, user, {new: true}, (err, data) => {
@@ -148,6 +150,7 @@ function updateUser(req, res) {
                 name: update.name,
                 username: update.username,
                 email: update.email,
+                phone: update.phone,
                 rol: update.rol,
                 image: update.image,
                 password: password
@@ -183,6 +186,7 @@ function getUser(req, res) {
             name: datos['name'],
             username: datos['username'],
             email: datos['email'],
+            phone: datos['phone'],
             rol: datos['rol'],
             password: datos['password'],
             image: datos['image']

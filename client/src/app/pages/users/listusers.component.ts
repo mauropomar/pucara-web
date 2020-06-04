@@ -71,7 +71,7 @@ export class ListusersComponent implements OnInit {
     edit(user) {
         this.global.editando = true;
         let id = user._id;
-        this.router.navigate(['home/user', id]);
+        this.router.navigate(['/user', id]);
     }
 
     delete() {
@@ -110,6 +110,5 @@ export class ListusersComponent implements OnInit {
     next() {
         this.router.navigate(['home/users', this.nextpage]);
     }
-
 
 }

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 .card .header{
     background-image: linear-gradient(#C33436,#C03135, #D8494E,#DB4C52 ) ;
+    height: 60px;
 }
 
 .card .header .title, .category{
