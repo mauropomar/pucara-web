@@ -8,7 +8,7 @@ import {AppRoutingModule} from './app.routing';
 import {NavbarModule} from './shared/navbar/navbar.module';
 import {FooterModule} from './shared/footer/footer.module';
 import {SidebarModule} from './sidebar/sidebar.module';
-//import {MaterialModule} from './material/material.module';
+import {MaterialModule} from './material/material.module';
 
 import {AppComponent} from './app.component';
 
@@ -27,7 +27,7 @@ import { FormusersComponent } from './pages/users/formusers.component';
         NavbarModule,
         FooterModule,
         SidebarModule,
-     //   MaterialModule,
+        MaterialModule,
         AppRoutingModule
     ],
     declarations: [

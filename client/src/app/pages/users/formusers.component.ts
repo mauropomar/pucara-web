@@ -30,6 +30,7 @@ export class FormusersComponent implements OnInit {
         rol: string = '1';
         password: string;
         phone: string;
+        adreess:string;
         confirm_password: string;
         password_anterior: string;
         image: any;
@@ -55,39 +56,12 @@ export class FormusersComponent implements OnInit {
                 this.obtener(id);
             }
         })
-        this.forma = new FormGroup({
-            nombre: new FormControl('', Validators.required),
-            apellidos: new FormControl('', Validators.required),
-            cuenta: new FormControl('', Validators.required),
-            password: new FormControl(''),
-            confirmpassword: new FormControl(''),
-            email: new FormControl('', [Validators.required,
-                Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
-        })
-        if (!this.editando) {
-            this.forma.controls['password'].setValidators([
-                Validators.required
-            ])
-            this.forma.controls['confirmpassword'].setValidators([
-                Validators.required,
-                this.noIgual.bind(this.forma)
-            ])
-        }
+
 
     }
 
     ngOnInit(): void {
         this.global.title = 'Usuarios';
-    }
-
-    noIgual(control: FormControl): { [s: string]: boolean } {
-        let forma: any = this;
-        if (control.value != forma.controls['password'].value) {
-            return {
-                noiguales: true
-            }
-        }
-        return null
     }
 
     preview(files) {

@@ -3,6 +3,7 @@ export interface UserModel {
     username:string;
     email:string;
     phone:string;
+    adreess:string;
     rol:string;
     password:string;
     confirm_password:string;
