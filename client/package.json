@@ -23,7 +23,7 @@
         "@angular/platform-browser": "9.0.6",
         "@angular/platform-browser-dynamic": "9.0.6",
         "@angular/router": "9.0.6",
-        "@ecodev/fab-speed-dial": "0.0.3",
+        "@ecodev/fab-speed-dial": "^5.0.3",
         "@ngui/map": "0.30.3",
         "@types/googlemaps": "3.39.3",
         "animate.css": "3.7.0",
@@ -35,9 +35,13 @@
         "font-awesome": "^4.7.0",
         "googleapis": "33.0.0",
         "jquery": "3.4.1",
+        "material-design-icons": "^3.0.1",
+        "material-design-icons-iconfont": "^5.0.1",
+        "ngx-loading": "^8.0.0",
         "perfect-scrollbar": "1.4.0",
         "rxjs": "6.5.4",
         "rxjs-compat": "6.5.4",
+        "source-map-support": "^0.5.19",
         "zone.js": "0.10.2"
     },
     "devDependencies": {

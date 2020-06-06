@@ -14,7 +14,8 @@ import {FormusersComponent} from "../../pages/users/formusers.component";
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
     {path: 'user', component: UserComponent},
-    {path: 'users', component: ListusersComponent, data: {title: 'Usuarios'}},
+    {path: 'users/:page', component: ListusersComponent, data: {title: 'Usuarios'}},
+    {path: 'user/new', component: FormusersComponent, data: {title: 'Nuevo Usuario'}},
     {path: 'user/:id', component: FormusersComponent, data: {title: 'Editar Usuario'}},
     {path: 'table', component: TablesComponent},
     {path: 'typography', component: TypographyComponent},

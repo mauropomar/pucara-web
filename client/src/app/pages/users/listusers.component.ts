@@ -39,7 +39,7 @@ export class ListusersComponent implements OnInit {
 
     create() {
         this.global.editando = false;
-        this.router.navigate(['home/user/nuevo']);
+        this.router.navigate(['user/new']);
     }
 
     actualPage() {
@@ -88,7 +88,7 @@ export class ListusersComponent implements OnInit {
     }
 
     showConfirmDelete(user) {
-        $('#modalcrud').modal("show");
+        $('#modalConfirmDelete').appendTo('body').modal("show");
         this.userselect = user;
     }
 

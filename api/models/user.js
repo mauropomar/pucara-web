@@ -8,6 +8,7 @@ var UserSchema = Schema({
     username: String,
     email: String,
     phone: String,
+    adreess: String,
     password: String,
     rol: {type: Schema.ObjectId, ref: 'Rol'},
     image: String

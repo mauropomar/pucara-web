@@ -41,12 +41,13 @@ function loginUser(req, res) {
 function saveUser(req, res) {
     var params = req.body;
     var user = new User();
-    if (params.rol != '1' && params.sucursal != '1') {
+    if (params.rol != '1') {
         user.name = params.name;
         user.username = params.username;
         user.email = params.email;
         user.phone = params.phone;
         user.rol = params.rol;
+        user.adreess = params.adreess;
         user.image = null;
         User.find({
             $or: [{email: user.email.toLowerCase()},
@@ -105,7 +106,8 @@ function updatePerfil(req, res) {
                 name: update.name,
                 username: update.username,
                 email: update.email,
-                imagen: update.imagen,
+                image: update.image,
+                adreess:  update.adreess,
                 phone: update.phone,
                 password: password
             };
@@ -152,6 +154,7 @@ function updateUser(req, res) {
                 email: update.email,
                 phone: update.phone,
                 rol: update.rol,
+                adreess: update.adreess,
                 image: update.image,
                 password: password
             };
@@ -187,6 +190,7 @@ function getUser(req, res) {
             username: datos['username'],
             email: datos['email'],
             phone: datos['phone'],
+            adreess: datos['adreess'],
             rol: datos['rol'],
             password: datos['password'],
             image: datos['image']
@@ -220,7 +224,7 @@ function uploadImage(req, res) {
     var userId = req.params.id;
 
     if (req.files) {
-        var file_path = req.files.imagen.path;
+        var file_path = req.files.image.path;
         //  console.log(file_path);
         var file_split = file_path.split('\\');
         //   console.log(file_split);
@@ -234,7 +238,7 @@ function uploadImage(req, res) {
           }*/
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
             //Actualizar documento usuario logueado
-            User.findByIdAndUpdate(userId, {imagen: file_name}, {new: true}, (err, datos) => {
+            User.findByIdAndUpdate(userId, {image: file_name}, {new: true}, (err, datos) => {
                 if (err) return res.status(500).send({message: 'Error en la peticion.'});
                 if (!datos) return res.status(404).send({message: 'No se ha podido actualizar.'});
                 return res.status(200).send({user: datos});

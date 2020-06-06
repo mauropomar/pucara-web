@@ -1,0 +1,7 @@
+<div class="form-group">
+    <select [(ngModel)]="selected" class="form-control" (change) = "seleccionar($event.target.value)" placeholder="Rol" class="form-control" name="rol"
+            required>
+        <option value="1">Seleccione un rol</option>
+        <option *ngFor="let r of data" [value]="r._id">{{r.name}}</option>
+    </select>
+</div>

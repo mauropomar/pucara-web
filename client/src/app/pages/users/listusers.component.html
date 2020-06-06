@@ -38,8 +38,8 @@
                                     <td style="text-align: center">{{item.email}}</td>
                                     <td style="text-align: center">{{item.rol.name}}</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" class="btn btn-primary" (click)="edit(item)"><i class="pe-7s-pen">Editar</i></button>
-                                        <button type="button" class="btn btn-danger"><i class="pe-7s-less">Borrar</i></button>
+                                        <button type="button" class="btn btn-primary" style="margin-right: 4px" (click)="edit(item)"><i class="pe-7s-pen">Editar</i></button>
+                                        <button type="button" class="btn btn-danger"><i class="pe-7s-less" (click)="showConfirmDelete(item)">Borrar</i></button>
                                     </td>
                                 </tr>
                             </ng-container>
@@ -50,5 +50,7 @@
             </div>
         </div>
     </div>
+    <app-favbutton (addData)="create()"></app-favbutton>
+    <app-confirmdelete [message]="messagedelete" (deleteEvent)="delete()"></app-confirmdelete>
 </div>
 

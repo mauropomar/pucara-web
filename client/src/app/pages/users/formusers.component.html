@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content"  #customLoadingformusuarioTemplate>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -7,67 +7,64 @@
                         <h4 class="title">{{title}}</h4>
                     </div>
                     <div class="content">
-                        <form #forma="ngForm" novalidate="">
+                        <form [formGroup]="forma" novalidate="novalidate">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group"
-                                         [ngClass]="{'has-danger':nameuser.errors?.minlength}">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('name').valid}">
                                         <label>Nombre y Apellidos <a style="color:red">*</a></label>
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Nombre"
                                                [(ngModel)]="user.name"
-                                               name="nameuser"
-                                               minlength="5"
-                                               #nameuser="ngModel"
-                                               required>
-                                        <div class="haserror" *ngIf="nameuser.errors?.required">
+                                               formControlName="name">
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.required">
                                             Este campo es requerido.
                                         </div>
-                                        <div class="haserror" *ngIf="nameuser.errors?.minlength">
-                                            Debe introducir más de {{nameuser.errors.minlength.requiredLength}} caracteres.
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.minlength">
+                                            Por lo menos 5 caracteres.
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('username').valid}">
                                         <label>Usuario <a style="color:red">*</a></label>
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Usuario"
-                                               [(ngModel)]="user.username"
-                                               name="username"
-                                               #username="ngModel"
-                                               required>
-                                        <div class="haserror" *ngIf="username.errors?.required">
+                                               formControlName="username"
+                                               [(ngModel)]="user.username">
+                                        <div class="haserror" *ngIf="forma.get('username').errors?.required">
                                             Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('username').errors?.minlength">
+                                            Por lo menos 3 caracteres.
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Rol</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               placeholder="Rol"
-                                               [(ngModel)]="user.rol"
-                                               name="rol"
-                                               required>
+                                        <label>Rol <a style="color:red">*</a></label>
+                                        <app-comboroles (changeValue)="user.rol=$event"
+                                                        [selected]="user.rol"></app-comboroles>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Correo</label>
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('email').valid}">
+                                        <label>Correo <a style="color:red">*</a></label>
                                         <input type="email"
                                                class="form-control"
                                                placeholder="Correo electrónico"
+                                               formControlName="email"
                                                [(ngModel)]="user.email"
-                                               name="email"
-                                               required
-                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                        >
+                                        <div class="haserror" *ngIf="forma.get('email').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('email').hasError('pattern')">
+                                            Este correo es incorrecto.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -77,7 +74,38 @@
                                                class="form-control"
                                                placeholder="Teléfono"
                                                [(ngModel)]="user.phone"
+                                               formControlName="phone"
                                                name="phone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('email').valid}">
+                                        <label>Contraseña <a style="color:red">*</a></label>
+                                        <input type="password"
+                                               class="form-control"
+                                               placeholder="Contraseña"
+                                               formControlName="password"
+                                               [(ngModel)]="user.password"
+                                        >
+                                        <div class="haserror" *ngIf="forma.get('password').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('email').valid}">
+                                        <label>Confirmar Contraseña <a style="color:red">*</a></label>
+                                        <input type="password"
+                                               class="form-control"
+                                               placeholder="Confirmar Contraseña"
+                                               formControlName="confirmpassword"
+                                               [(ngModel)]="user.confirm_password"
+                                        >
+                                        <div class="haserror" *ngIf="forma.get('confirmpassword').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -85,13 +113,47 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Dirección</label>
-                                        <input type="text" class="form-control" placeholder="Dirección"
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Dirección"
+                                               formControlName="adreess"
                                                [(ngModel)]="user.adreess">
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="file-field">
+                                        <div class="btn btn-secondary btn-sm float-left">
+                                            <input type="file" #file
+                                                   accept='image/*'
+                                                   (change)="preview(file.files);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                            <button type="submit"
+                                    class="btn btn-info btn-fill pull-right"
+                                    (click)="cancel()"
+                            >
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                    [disabled]="!forma.valid"
+                                    (click)="insert(true)"
+                                    class="btn btn-info btn-fill pull-right"
+                                    style="margin-right:5px;">
+                                Aceptar
+                            </button>
+                            <button type="submit"
+                                    [disabled]="!forma.valid"
+                                    *ngIf="!editando"
+                                    (click)="insert(false)"
+                                    class="btn btn-info btn-fill pull-right m"
+                                    style="margin-right:5px;">
+                                Agregar
+                            </button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -100,32 +162,27 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+                        <img src="../../../assets/img/licores.jpg"
                              alt="..."/>
                     </div>
                     <div class="content">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="assets/img/faces/face-3.jpg" alt="..."/>
+                                <img class="avatar border-gray" src="{{(!ischangeImage && user.image != null)?url+'get-image-user/'+user.image:user.image | noimageuser}}" alt="..."/>
 
-                                <h4 class="title">Mike Andrew<br/>
-                                    <small>michael24</small>
+                                <h4 class="title">{{user.name}}<br/>
+                                    <small>{{user.username}}</small>
                                 </h4>
                             </a>
                         </div>
-                        <p class="description text-center"> "Lamborghini Mercy <br>
-                            Your chick she so thirsty <br>
-                            I'm in that two seat Lambo"
+                        <p class="description text-center">
+
                         </p>
-                    </div>
-                    <hr>
-                    <div class="text-center">
-                        <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-                        <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-                        <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
                     </div>
                 </div>
             </div>
+            <ngx-loading [show]="showLoading" [config]="{ backdropBorderRadius: '3px' }"
+                         [template]="customLoadingformusuarioTemplate"></ngx-loading>
         </div>
     </div>
 </div>

@@ -30,7 +30,7 @@ export class FormusersComponent implements OnInit {
         rol: string = '1';
         password: string;
         phone: string;
-        adreess:string;
+        adreess: string;
         confirm_password: string;
         password_anterior: string;
         image: any;
@@ -48,20 +48,48 @@ export class FormusersComponent implements OnInit {
         this.activateRoute.params.subscribe(params => {
             this.editando = this.global.editando;
             this.title = 'Nuevo Usuario';
-            if (params['id'] != 'nuevo') {
+            this.resetFields();
+            if (params['id']) {
                 this.global.editando = true;
                 this.editando = this.global.editando;
                 this.title = 'Editar Usuario';
                 let id = params['id'];
-                this.obtener(id);
+                this.getOne(id);
             }
         })
 
+        this.forma = new FormGroup({
+            name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+            username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+            email: new FormControl('', [Validators.required,
+                Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
+            phone:new FormControl(),
+            adreess:new FormControl(),
+            password:new FormControl('', Validators.required),
+            confirmpassword:new FormControl()
+        })
+        this.forma.controls['password'].setValidators([
+            Validators.required
+        ])
+         this.forma.controls['confirmpassword'].setValidators([
+             Validators.required,
+             this.noIgual.bind(this.forma)
+         ])
 
     }
 
     ngOnInit(): void {
         this.global.title = 'Usuarios';
+    }
+
+    noIgual(control: FormControl, confirm): { [s: string]: boolean } {
+        let forma: any = this;
+        if (control.value != forma.controls['password'].value) {
+            return {
+                noiguales: true
+            }
+        }
+        return null
     }
 
     preview(files) {
@@ -81,14 +109,14 @@ export class FormusersComponent implements OnInit {
         }
     }
 
-    insertar(cerrar) {
+    insert(cerrar) {
         if (this.user.password != this.user.confirm_password) {
             this.util.showNotification('pe-7s-info', 'error', 'Las contraseñas mo coinciden.');
             return;
         }
         ;
         if (this.editando === true) {
-            this.modificar();
+            this.update();
             return;
         }
         this.showLoading = true;
@@ -96,7 +124,7 @@ export class FormusersComponent implements OnInit {
             .subscribe((data: any) => {
                 this.showLoading = false;
                 if (data.success === true) {
-                    this.util.showNotification('pe-7s-check', 'info', data.message);
+                    this.util.showNotification('pe-7s-check', 'success', data.message);
                     this.uploadImage(data, cerrar);
                     this.resetFields();
                 } else {
@@ -108,7 +136,7 @@ export class FormusersComponent implements OnInit {
             })
     }
 
-    modificar() {
+    update() {
         if (this.user.password != this.user.confirm_password) {
             this.util.showNotification('pe-7s-info', 'error', 'Las contraseñas mo coinciden.');
             return;
@@ -119,7 +147,7 @@ export class FormusersComponent implements OnInit {
             .subscribe((data: any) => {
                 this.showLoading = false;
                 if (data.success === true) {
-                    this.util.showNotification('pe-7s-check', 'info', data.message);
+                    this.util.showNotification('pe-7s-check', 'success', data.message);
                     this.uploadImage(data, true);
                 } else {
                     this.util.showNotification('pe-7s-info', 'error', data.message);
@@ -135,21 +163,25 @@ export class FormusersComponent implements OnInit {
         let url = this.url + 'upload-image-user/' + data.user._id;
         if (!this.file) {
             if (cerrar) {
-                this.router.navigate(['home/users/1']);
+                this.router.navigate(['users/1']);
             }
 
         }
         this.uploadService.makeFileRequest(url, [], this.file, this.token, 'image')
             .then((result: any) => {
                 if (cerrar) {
-                    this.user.image = result.user.imagen;
-                    this.router.navigate(['home/users/1']);
+                    this.user.image = result.user.image;
+                    this.router.navigate(['users/1']);
                     return;
                 }
             });
     }
 
-    obtener(id) {
+    cancel() {
+        this.router.navigate(["users/1"]);
+    }
+
+    getOne(id) {
         this.userService.getOne(id)
             .subscribe(data => {
                 this.user = data[0];
@@ -162,11 +194,11 @@ export class FormusersComponent implements OnInit {
         this.user.name = '';
         this.user.username = '';
         this.user.email = '';
-        this.user.rol = '1';
+        this.user.rol = '5ed22b455c4d4f2504fbdc8d';
         this.user.phone = '';
         this.user.password = '';
         this.user.confirm_password = '';
-        this.user.image = '../../../assets/img/default-user.png';
+        this.user.image = null;
     }
 
 }
