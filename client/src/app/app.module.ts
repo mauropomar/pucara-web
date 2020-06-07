@@ -20,6 +20,10 @@ import {ListusersComponent} from './pages/users/listusers.component';
 import {NoimageuserPipe} from './pipes/noimageuser.pipe';
 
 import { FormusersComponent } from './pages/users/formusers.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { LoginComponent } from './pages/login/login.component';
+import { ListrolsComponent } from './pages/rols/listrols.component';
+import { FormrolsComponent } from './pages/rols/formrols.component';
 
 @NgModule({
     imports: [
@@ -34,14 +38,18 @@ import { FormusersComponent } from './pages/users/formusers.component';
         MaterialModule,
         ComponentModule,
         NgxLoadingModule.forRoot({}),
-        AppRoutingModule
+        AppRoutingModule,
+        MatTooltipModule
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
         ListusersComponent,
         NoimageuserPipe,
-        FormusersComponent
+        FormusersComponent,
+        LoginComponent,
+        ListrolsComponent,
+        FormrolsComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

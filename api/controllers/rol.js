@@ -47,9 +47,7 @@ function getRols(req, res) {
         if (err) return res.status(500).send({ message: 'Error en la peticion' });
         if (!datos) return res.status(400).send({ message: 'No hay roles disponibles.' });
         return res.status(200).send({
-            datos,
-            total,
-            pages: Math.ceil(total / itemsPerPage)
+            datos:datos
         });
     });
 }
@@ -66,8 +64,46 @@ function getRol(req, res) {
     });
 }
 
+//-----------------------------------------------------------------------------------------------------//
+//editar los datos del usuario
+function updateRol(req, res) {
+    var rolId = req.params.id;
+    var update = req.body;
+    Rol.find({name: update.nombre.toLowerCase()}, (err, rol) => {
+        var rol_isset = false;
+        rol.forEach((p) => {
+            if (p && p._id != rolId)
+                rol_isset = true
+        });
+        if (rol_isset) return res.status(200).send({
+            success: false,
+            message: 'El rol que intentas actualizar ya existe.'
+        });
+        Rol.findByIdAndUpdate(rolId, update, {new: true}, (err, datos) => {
+            if (err) return res.status(500).send({success: false, message: 'Error en la peticion.'});
+            if (!datos) return res.status(404).send({success: false, message: 'No se ha podido actualizar.'});
+            return res.status(200).send({
+                pais: datos,
+                message: 'El rol fue actualizada con éxito',
+                success: true
+            });
+        });
+    })
+}
+
+function deleteRol(req, res) {
+    var rolId = req.params.id;
+    Rol.findOne({'_id': rolId}).remove(err => {
+        if (err)
+            return res.status(500).send({success: false, message: 'Imposible borrar este rol.'});
+        return res.status(200).send({success: true, message: 'El rol ha sido borrado con éxito.'});
+    })
+}
+
 module.exports = {
     saveRol,
     getRols,
-    getRol
+    getRol,
+    updateRol,
+    deleteRol
 }

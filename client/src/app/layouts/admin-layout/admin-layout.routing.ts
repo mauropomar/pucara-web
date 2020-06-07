@@ -10,10 +10,12 @@ import {NotificationsComponent} from '../../notifications/notifications.componen
 import {UpgradeComponent} from '../../upgrade/upgrade.component';
 import {ListusersComponent} from "../../pages/users/listusers.component";
 import {FormusersComponent} from "../../pages/users/formusers.component";
+import {ListrolsComponent} from "../../pages/rols/listrols.component";
+
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
-    {path: 'user', component: UserComponent},
+    {path: 'rols', component: ListrolsComponent, data: {title: 'Role'}},
     {path: 'users/:page', component: ListusersComponent, data: {title: 'Usuarios'}},
     {path: 'user/new', component: FormusersComponent, data: {title: 'Nuevo Usuario'}},
     {path: 'user/:id', component: FormusersComponent, data: {title: 'Editar Usuario'}},

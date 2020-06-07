@@ -14,7 +14,17 @@
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
-
+                                <button *ngIf="page > 1"  mat-fab matTooltip="Anterior"
+                                        (click)="previous()"
+                                        [matTooltipPosition]="'above'">
+                                    <i class="pe-7s-angle-left-circle"></i>
+                                </button>
+                                <button *ngIf="pages > page"  mat-fab
+                                        matTooltip="Siguiente"
+                                        (click)="next()"
+                                        [matTooltipPosition]="'above'">
+                                    <i class="pe-7s-angle-right-circle"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -39,7 +49,7 @@
                                     <td style="text-align: center">{{item.rol.name}}</td>
                                     <td class="td-actions text-right">
                                         <button type="button" class="btn btn-primary" style="margin-right: 4px" (click)="edit(item)"><i class="pe-7s-pen">Editar</i></button>
-                                        <button type="button" class="btn btn-danger"><i class="pe-7s-less" (click)="showConfirmDelete(item)">Borrar</i></button>
+                                        <button type="button" class="btn btn-danger" (click)="showConfirmDelete(item)"><i class="pe-7s-less">Borrar</i></button>
                                     </td>
                                 </tr>
                             </ng-container>

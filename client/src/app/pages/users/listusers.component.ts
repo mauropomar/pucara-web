@@ -55,6 +55,7 @@ export class ListusersComponent implements OnInit {
                     this.prevpage = 1;
                 }
             }
+            this.page = page;
             this.getUsers(page);
         })
     }
@@ -88,7 +89,7 @@ export class ListusersComponent implements OnInit {
     }
 
     showConfirmDelete(user) {
-        $('#modalConfirmDelete').appendTo('body').modal("show");
+        $('#modalConfirmDelete').modal("show");
         this.userselect = user;
     }
 
@@ -104,11 +105,11 @@ export class ListusersComponent implements OnInit {
     }
 
     previous() {
-        this.router.navigate(['home/users', this.prevpage]);
+        this.router.navigate(['users', this.prevpage]);
     }
 
     next() {
-        this.router.navigate(['home/users', this.nextpage]);
+        this.router.navigate(['users', this.nextpage]);
     }
 
 }
