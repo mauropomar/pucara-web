@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 
 var RolSchema = Schema({
     name: String,
-    description: String
+    description: String,
+    active:Boolean
 });
 
 module.exports = mongoose.model('Rol', RolSchema);

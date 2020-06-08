@@ -11,11 +11,15 @@ import {UpgradeComponent} from '../../upgrade/upgrade.component';
 import {ListusersComponent} from "../../pages/users/listusers.component";
 import {FormusersComponent} from "../../pages/users/formusers.component";
 import {ListrolsComponent} from "../../pages/rols/listrols.component";
+import {LoginComponent} from "../../pages/login/login.component";
+import {FormrolsComponent} from "../../pages/rols/formrols.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
-    {path: 'rols', component: ListrolsComponent, data: {title: 'Role'}},
+    {path: 'rols', component: ListrolsComponent, data: {title: 'Roles'}},
+    {path: 'rol/new', component: FormrolsComponent, data: {title: 'Nuevo Rol'}},
+    {path: 'rol/:id', component: FormrolsComponent, data: {title: 'Editar Rol'}},
     {path: 'users/:page', component: ListusersComponent, data: {title: 'Usuarios'}},
     {path: 'user/new', component: FormusersComponent, data: {title: 'Nuevo Usuario'}},
     {path: 'user/:id', component: FormusersComponent, data: {title: 'Editar Usuario'}},

@@ -27,8 +27,12 @@
                                     <td style="text-align: center">{{item.name}}</td>
                                     <td style="text-align: center">{{item.description}}</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" class="btn btn-primary" style="margin-right: 4px" (click)="edit(item)"><i class="pe-7s-pen">Editar</i></button>
-                                        <button type="button" class="btn btn-danger" (click)="showConfirmDelete(item)"><i class="pe-7s-less">Borrar</i></button>
+                                        <button type="button" mat-fab class="btn btn-primary" (click)="edit(item)" data-toggle="tooltip" data-placement="top" title="Editar">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <button type="button"mat-fab  class="btn btn-danger" (click)="showConfirmDelete(item)" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                            <i class="material-icons">delete</i>
+                                        </button>
                                     </td>
                                 </tr>
                             </ng-container>

@@ -14,16 +14,18 @@
                                 </div>
                             </div>
                             <div class="col-md-4 text-right">
-                                <button *ngIf="page > 1"  mat-fab matTooltip="Anterior"
-                                        (click)="previous()"
-                                        [matTooltipPosition]="'above'">
-                                    <i class="pe-7s-angle-left-circle"></i>
+                                <button *ngIf="page > 1"  mat-fab
+                                        data-toggle="tooltip" data-placement="top" title="Anterior"
+                                        class="button-filter"
+                                        (click)="previous()">
+                                    <i class="material-icons">arrow_back</i>
                                 </button>
-                                <button *ngIf="pages > page"  mat-fab
-                                        matTooltip="Siguiente"
-                                        (click)="next()"
-                                        [matTooltipPosition]="'above'">
-                                    <i class="pe-7s-angle-right-circle"></i>
+                                <button *ngIf="pages > page" mat-fab
+                                        data-placement="top" title="Siguiente"
+                                        class="button-filter"
+                                        (click)="next()">
+                                    <i class="material-icons">arrow_forward</i>
+
                                 </button>
                             </div>
                         </div>
@@ -48,8 +50,12 @@
                                     <td style="text-align: center">{{item.email}}</td>
                                     <td style="text-align: center">{{item.rol.name}}</td>
                                     <td class="td-actions text-right">
-                                        <button type="button" class="btn btn-primary" style="margin-right: 4px" (click)="edit(item)"><i class="pe-7s-pen">Editar</i></button>
-                                        <button type="button" class="btn btn-danger" (click)="showConfirmDelete(item)"><i class="pe-7s-less">Borrar</i></button>
+                                        <button type="button" mat-fab class="btn btn-primary" (click)="edit(item)" data-toggle="tooltip" data-placement="top" title="Editar">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <button type="button"mat-fab  class="btn btn-danger" (click)="showConfirmDelete(item)" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                            <i class="material-icons">delete</i>
+                                        </button>
                                     </td>
                                 </tr>
                             </ng-container>

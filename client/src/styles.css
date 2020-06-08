@@ -1,1 +1,25 @@
 @import "../node_modules/material-design-icons-iconfont/dist/material-design-icons.css";
+
+button[type="submit"]{
+    background: #DB4C52; /* Old browsers */
+    color: white;
+}
+
+.card .header{
+    background-image: linear-gradient(#C33436,#C03135, #D8494E,#DB4C52 ) ;
+}
+
+.card .header .title, .category{
+    color: white;
+}
+
+.ng-invalid.ng-touched:not(form){
+    border:1px solid red;
+}
+
+.haserror{
+    color: red;
+    font-size: 10px;
+    margin-top:3px;
+    padding-left: 3px;
+}

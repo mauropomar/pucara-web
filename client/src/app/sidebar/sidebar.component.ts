@@ -8,15 +8,15 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-    { path: '/users/1', title: 'Usuarios',  icon:'pe-7s-users', class: '' },
-    { path: '/rols', title: 'Roles',  icon:'pe-7s-user', class: '' },
-    { path: '/table', title: 'Table List',  icon:'pe-7s-note2', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
+   // { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+    { path: '/home/users/1', title: 'Usuarios',  icon:'pe-7s-users', class: '' },
+    { path: '/home/rols', title: 'Roles',  icon:'pe-7s-user', class: '' },
+  //  { path: '/table', title: 'Table List',  icon:'pe-7s-note2', class: '' },
+  //  { path: '/typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '' },
+  //  { path: '/icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
+ //   { path: '/maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '' },
+  //  { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
+  //  { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
 ];
 
 @Component({

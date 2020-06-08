@@ -39,7 +39,7 @@ export class ListusersComponent implements OnInit {
 
     create() {
         this.global.editando = false;
-        this.router.navigate(['user/new']);
+        this.router.navigate(['home/user/new']);
     }
 
     actualPage() {
@@ -72,7 +72,7 @@ export class ListusersComponent implements OnInit {
     edit(user) {
         this.global.editando = true;
         let id = user._id;
-        this.router.navigate(['/user', id]);
+        this.router.navigate(['home/user', id]);
     }
 
     delete() {
@@ -105,11 +105,11 @@ export class ListusersComponent implements OnInit {
     }
 
     previous() {
-        this.router.navigate(['users', this.prevpage]);
+        this.router.navigate(['home/users', this.prevpage]);
     }
 
     next() {
-        this.router.navigate(['users', this.nextpage]);
+        this.router.navigate(['home/users', this.nextpage]);
     }
 
 }

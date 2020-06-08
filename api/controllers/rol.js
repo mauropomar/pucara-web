@@ -10,58 +10,29 @@ var Rol = require('../models/rol');
 function saveRol(req, res) {
     var params = req.body;
     var role = new Rol();
-
-    if (params.name) {
-        role.name = params.name;
-        role.description = params.description;
-        Rol.find({ name: params.name.toLowerCase() }).exec((err, roles) => {
-            if (err) return res.status(500).send({ mesage: 'Error en la petición de roles.' });
+    role.name = params.name;
+    role.description = params.description;
+    role.active = true;
+    Rol.find({name: params.name.toLowerCase()}).exec((err, roles) => {
+            if (err) return res.status(500).send({mesage: 'Error en la petición de roles.'});
             if (roles && roles.length > 1) {
-                return res.status(200).send({ message: 'El rol que intentas registrar ya existe.' })
+                return res.status(200).send({message: 'El rol que intentas registrar ya existe.'})
             } else {
                 role.save((err, roleStore) => {
-                    if (err) return res.status(500).send({ message: 'Error al guardar el rol.' });
+                    if (err) return res.status(500).send({message: 'Error al guardar el rol.'});
                     if (roleStore) {
-                        res.status(200).send({ rol: roleStore });
+                        res.status(200).send({
+                            success: true,
+                            message: 'El rol fue registrado con éxito',
+                            datos: roleStore
+                        });
                     } else {
-                        res.status(404).send({ message: 'No se ha registrado el rol' });
+                        res.status(404).send({message: 'No se ha registrado el rol'});
                     }
                 });
             }
         }
-        )
-    } else {
-        res.status(200).send({
-            message: 'Envia todos los campos necesarios'
-        });
-    }
-}
-
-function getRols(req, res) {
-    var page = 1;
-    if (req.params.page) {
-        page = req.params.page;
-    }
-    var itemsPerPage = 10;
-    Rol.find().sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
-        if (err) return res.status(500).send({ message: 'Error en la peticion' });
-        if (!datos) return res.status(400).send({ message: 'No hay roles disponibles.' });
-        return res.status(200).send({
-            datos:datos
-        });
-    });
-}
-
-
-function getRol(req, res) {
-    var rolId = req.params.id;
-    Rol.findById(rolId, (err, datos) => {
-        if (err)
-            return res.status(500).send({ message: 'Error en la petición' });
-        if (!datos)
-            return res.status(404).send({ message: 'El usuario no existe' });
-        return res.status(200).send({ datos: datos });
-    });
+    )
 }
 
 //-----------------------------------------------------------------------------------------------------//
@@ -69,7 +40,7 @@ function getRol(req, res) {
 function updateRol(req, res) {
     var rolId = req.params.id;
     var update = req.body;
-    Rol.find({name: update.nombre.toLowerCase()}, (err, rol) => {
+    Rol.find({name: update.name.toLowerCase()}, (err, rol) => {
         var rol_isset = false;
         rol.forEach((p) => {
             if (p && p._id != rolId)
@@ -99,6 +70,36 @@ function deleteRol(req, res) {
         return res.status(200).send({success: true, message: 'El rol ha sido borrado con éxito.'});
     })
 }
+
+function getRols(req, res) {
+    var page = 1;
+    if (req.params.page) {
+        page = req.params.page;
+    }
+    var itemsPerPage = 10;
+    Rol.find({active: true}).sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
+        if (err) return res.status(500).send({message: 'Error en la peticion'});
+        if (!datos) return res.status(400).send({message: 'No hay roles disponibles.'});
+        return res.status(200).send({
+            datos: datos
+        });
+    });
+}
+
+
+function getRol(req, res) {
+    var rolId = req.params.id;
+    Rol.findById(rolId, (err, datos) => {
+        if (err)
+            return res.status(500).send({message: 'Error en la petición'});
+        if (!datos)
+            return res.status(404).send({message: 'El usuario no existe'});
+        return res.status(200).send({
+            datos: datos
+        });
+    });
+}
+
 
 module.exports = {
     saveRol,

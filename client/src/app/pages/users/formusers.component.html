@@ -133,25 +133,27 @@
                                 </div>
                             </div>
 
-                            <button type="submit"
-                                    class="btn btn-info btn-fill pull-right"
+                            <button mat-raised-button type="submit"
+                                    class="btn-fill pull-right"
                                     (click)="cancel()"
-                            >
+                            ><i class="material-icons">cancel</i>
                                 Cancelar
                             </button>
-                            <button type="submit"
+                            <button type="submit" mat-raised-button
                                     [disabled]="!forma.valid"
                                     (click)="insert(true)"
-                                    class="btn btn-info btn-fill pull-right"
+                                    class="btn-fill pull-right"
                                     style="margin-right:5px;">
+                                <i class="material-icons">done_outline</i>
                                 Aceptar
                             </button>
-                            <button type="submit"
+                            <button mat-raised-button type="submit"
                                     [disabled]="!forma.valid"
                                     *ngIf="!editando"
                                     (click)="insert(false)"
-                                    class="btn btn-info btn-fill pull-right m"
+                                    class="btn-fill pull-right"
                                     style="margin-right:5px;">
+                                <i class="material-icons">add</i>
                                 Agregar
                             </button>
                             <div class="clearfix"></div>

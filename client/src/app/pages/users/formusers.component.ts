@@ -171,14 +171,14 @@ export class FormusersComponent implements OnInit {
             .then((result: any) => {
                 if (cerrar) {
                     this.user.image = result.user.image;
-                    this.router.navigate(['users/1']);
+                    this.router.navigate(['home/users/1']);
                     return;
                 }
             });
     }
 
     cancel() {
-        this.router.navigate(["users/1"]);
+        this.router.navigate(["home/users/1"]);
     }
 
     getOne(id) {

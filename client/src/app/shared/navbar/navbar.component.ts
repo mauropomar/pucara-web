@@ -2,6 +2,8 @@ import {Component, OnInit, ElementRef} from '@angular/core';
 import {ROUTES} from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {GlobalService} from "../../services/global.service";
+import {Router} from '@angular/router';
+import {LoginService} from "../../services/login.service";
 
 @Component({
     // moduleId: module.id,
@@ -14,8 +16,14 @@ export class NavbarComponent implements OnInit {
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    public imagenuser:string = '';
+    public url: string;
+    public nameuser:string = '';
+    public namerol:string = '';
 
-    constructor(location: Location, private element: ElementRef, private global:GlobalService) {
+    constructor(location: Location, private element: ElementRef,
+                private global:GlobalService, private router: Router,
+                private login:LoginService) {
         this.location = location;
         this.sidebarVisible = false;
     }
@@ -66,5 +74,16 @@ export class NavbarComponent implements OnInit {
             }
         }
         return this.global.title;
+    }
+
+    showlogin(){
+        this.router.navigate(['login']);
+    }
+
+    logout(){
+        localStorage.clear();
+        localStorage.setItem('identity', null);
+        localStorage.setItem('token', null);
+       //this.router.navigate(['login']);
     }
 }

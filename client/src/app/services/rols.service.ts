@@ -18,7 +18,8 @@ export class RolService {
 
   register(rol: RolModel): Observable<any> {
     let params = JSON.stringify(rol);
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', this.loginService.getToken());
     let url = this.url + 'register-rol';
     return this.http.post(url, params, {headers: headers})
         .pipe(map(response => {

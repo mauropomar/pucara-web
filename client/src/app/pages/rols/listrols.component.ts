@@ -32,7 +32,7 @@ export class ListrolsComponent implements OnInit {
 
   create() {
     this.global.editando = false;
-    this.router.navigate(['rol/new']);
+    this.router.navigate(['home/rol/new']);
   }
 
   actualPage() {
@@ -51,7 +51,7 @@ export class ListrolsComponent implements OnInit {
   edit(user) {
     this.global.editando = true;
     let id = user._id;
-    this.router.navigate(['/rol', id]);
+    this.router.navigate(['home/rol', id]);
   }
 
   delete() {
@@ -59,7 +59,7 @@ export class ListrolsComponent implements OnInit {
     this.service.delete(user)
         .subscribe((data: any) => {
           if (data.success == true) {
-            this.util.showNotification('pe-7s-check', 'info', data.message);
+            this.util.showNotification('pe-7s-check', 'success', data.message);
             this.deleteOfArray();
           }
         }, (error) => {

@@ -26,6 +26,7 @@ export class FormrolsComponent implements OnInit {
     public rol: RolModel = new class implements RolModel {
         name: string;
         description: string;
+        active:boolean=true;
     };
 
     constructor(private activateRoute: ActivatedRoute,
@@ -40,6 +41,7 @@ export class FormrolsComponent implements OnInit {
             this.editando = this.global.editando;
             this.title = 'Nuevo Rol';
             this.resetFields();
+
             if (params['id']) {
                 this.global.editando = true;
                 this.editando = this.global.editando;
@@ -47,6 +49,11 @@ export class FormrolsComponent implements OnInit {
                 let id = params['id'];
                 this.getOne(id);
             }
+        })
+        this.forma = new FormGroup({
+            name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            description: new FormControl(''),
+            active: new FormControl('')
         })
     }
 
@@ -56,7 +63,7 @@ export class FormrolsComponent implements OnInit {
     getOne(id) {
         this.rolService.getOne(id)
             .subscribe(data => {
-                this.rol = data[0];
+                this.rol = data;
             })
     }
 
@@ -73,7 +80,7 @@ export class FormrolsComponent implements OnInit {
                     this.util.showNotification('pe-7s-check', 'success', data.message);
                     this.resetFields();
                     if (cerrar)
-                        this.router.navigate(["rols"]);
+                        this.router.navigate(["home/rols"]);
                 } else {
                     this.util.showNotification('pe-7s-info', 'error', data.message);
                 }
@@ -86,7 +93,7 @@ export class FormrolsComponent implements OnInit {
             .subscribe((data: any) => {
                 this.showLoading = false;
                 if (data.success === true) {
-                    this.router.navigate(["rols"]);
+                    this.router.navigate(["home/rols"]);
                     this.util.showNotification('pe-7s-check', 'success', data.message);
                 } else {
                     this.util.showNotification('pe-7s-info', 'error', data.message);
@@ -96,7 +103,7 @@ export class FormrolsComponent implements OnInit {
 
 
     cancel() {
-        this.router.navigate(["rols"]);
+        this.router.navigate(["home/rols"]);
     }
 
     resetFields() {
