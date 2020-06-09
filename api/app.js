@@ -10,6 +10,7 @@ var app = express();
 //cargar rutas
 var user_routes = require('./routes/user');
 var rol_routes = require('./routes/rol');
+var category_prod_routes = require('./routes/category_prod');
 
 //middleware
 
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 //rutas
 app.use('/api', user_routes);
 app.use('/api', rol_routes);
+app.use('/api', category_prod_routes);
 
 
 //exportar

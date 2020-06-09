@@ -24,6 +24,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { LoginComponent } from './pages/login/login.component';
 import { ListrolsComponent } from './pages/rols/listrols.component';
 import { FormrolsComponent } from './pages/rols/formrols.component';
+import { ListcategoryProdComponent } from './pages/category-prod/listcategory-prod.component';
+import { FormcategoryProdComponent } from './pages/category-prod/formcategory-prod.component';
 
 @NgModule({
     imports: [
@@ -49,7 +51,9 @@ import { FormrolsComponent } from './pages/rols/formrols.component';
         FormusersComponent,
         LoginComponent,
         ListrolsComponent,
-        FormrolsComponent
+        FormrolsComponent,
+        ListcategoryProdComponent,
+        FormcategoryProdComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

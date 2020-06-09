@@ -13,16 +13,21 @@ import {FormusersComponent} from "../../pages/users/formusers.component";
 import {ListrolsComponent} from "../../pages/rols/listrols.component";
 import {LoginComponent} from "../../pages/login/login.component";
 import {FormrolsComponent} from "../../pages/rols/formrols.component";
+import {ListcategoryProdComponent} from "../../pages/category-prod/listcategory-prod.component";
+import {FormcategoryProdComponent} from "../../pages/category-prod/formcategory-prod.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
-    {path: 'rols', component: ListrolsComponent, data: {title: 'Roles'}},
-    {path: 'rol/new', component: FormrolsComponent, data: {title: 'Nuevo Rol'}},
-    {path: 'rol/:id', component: FormrolsComponent, data: {title: 'Editar Rol'}},
-    {path: 'users/:page', component: ListusersComponent, data: {title: 'Usuarios'}},
-    {path: 'user/new', component: FormusersComponent, data: {title: 'Nuevo Usuario'}},
-    {path: 'user/:id', component: FormusersComponent, data: {title: 'Editar Usuario'}},
+    {path: 'categoryprod/new', component: FormcategoryProdComponent},
+    {path: 'categoryprod/:id', component: FormcategoryProdComponent},
+    {path: 'categoryprods/:page', component: ListcategoryProdComponent},
+    {path: 'rols', component: ListrolsComponent},
+    {path: 'rol/new', component: FormrolsComponent},
+    {path: 'rol/:id', component: FormrolsComponent},
+    {path: 'users/:page', component: ListusersComponent},
+    {path: 'user/new', component: FormusersComponent},
+    {path: 'user/:id', component: FormusersComponent},
     {path: 'table', component: TablesComponent},
     {path: 'typography', component: TypographyComponent},
     {path: 'icons', component: IconsComponent},

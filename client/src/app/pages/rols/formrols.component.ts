@@ -7,8 +7,6 @@ import {RolModel} from "../../models/rol";
 import {RolService} from "../../services/rols.service";
 import {LoginService} from "../../services/login.service";
 import {UtilService} from "../../services/util.service";
-import {UsersService} from "../../services/users.service";
-import {UploadService} from "../../services/upload.service";
 
 @Component({
     selector: 'app-formrols',
@@ -22,7 +20,6 @@ export class FormrolsComponent implements OnInit {
     forma: FormGroup;
     public url: string;
     public token: string;
-    public file: any;
     public rol: RolModel = new class implements RolModel {
         name: string;
         description: string;
@@ -82,7 +79,7 @@ export class FormrolsComponent implements OnInit {
                     if (cerrar)
                         this.router.navigate(["home/rols"]);
                 } else {
-                    this.util.showNotification('pe-7s-info', 'error', data.message);
+                    this.util.showNotification('pe-7s-info', 'danger', data.message);
                 }
             })
     }
@@ -96,7 +93,7 @@ export class FormrolsComponent implements OnInit {
                     this.router.navigate(["home/rols"]);
                     this.util.showNotification('pe-7s-check', 'success', data.message);
                 } else {
-                    this.util.showNotification('pe-7s-info', 'error', data.message);
+                    this.util.showNotification('pe-7s-info', 'danger', data.message);
                 }
             })
     }

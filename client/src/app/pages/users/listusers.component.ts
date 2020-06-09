@@ -80,11 +80,11 @@ export class ListusersComponent implements OnInit {
         this.service.delete(user)
             .subscribe((data: any) => {
                 if (data.success == true) {
-                    this.util.showNotification('pe-7s-check', 'info', data.message);
+                    this.util.showNotification('pe-7s-check', 'success', data.message);
                     this.deleteOfArray();
                 }
             }, (error) => {
-                this.util.showNotification('pe-7s-info', 'error', 'Ha ocurrido un error al intentar borrar el usuario.');
+                this.util.showNotification('pe-7s-info', 'danger', 'Ha ocurrido un error al intentar borrar el usuario.');
             })
     }
 

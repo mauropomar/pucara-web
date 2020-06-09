@@ -23,3 +23,12 @@ button[type="submit"]{
     margin-top:3px;
     padding-left: 3px;
 }
+
+table th{
+    font-weight: bold;
+    text-align: center
+}
+
+table td{
+    text-align: center
+}
