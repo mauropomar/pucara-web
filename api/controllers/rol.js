@@ -13,9 +13,9 @@ function saveRol(req, res) {
     role.name = params.name;
     role.description = params.description;
     role.active = true;
-    Rol.find({name: params.name}).then(roles => {
-            if (roles && roles.length > 1) {
-                return res.status(200).send({message: 'El rol que intentas registrar ya existe.'})
+    Rol.find({name: params.name},(err, rol) => {
+            if (rol && rol.length > 0) {
+                return res.status(200).send({success:false, message: 'El rol que intentas registrar ya existe.'})
             } else {
                 role.save((err, roleStore) => {
                     if (err) return res.status(500).send({message: 'Error al guardar el rol.'});
@@ -39,7 +39,7 @@ function saveRol(req, res) {
 function updateRol(req, res) {
     var rolId = req.params.id;
     var update = req.body;
-    Rol.find({name: update.name + ''}, (err, rol) => {
+    Rol.find({name: update.name}, (err, rol) => {
         var rol_isset = false;
         rol.forEach((p) => {
             if (p && p._id != rolId)
