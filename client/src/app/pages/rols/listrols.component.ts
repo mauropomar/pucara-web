@@ -37,12 +37,12 @@ export class ListrolsComponent implements OnInit {
 
   actualPage() {
     this.activatedRoute.params.subscribe(params => {
-      this.getRols();
+      this.getAll(true);
     })
   }
 
-  getRols() {
-    this.service.getAll()
+  getAll(active) {
+    this.service.getAll(active)
         .subscribe(data => {
           this.rols = data;
         })

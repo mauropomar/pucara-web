@@ -6,18 +6,17 @@ var moment = require('moment');
 var mongoosePaginate = require('mongoose-pagination');
 
 var Category = require('../models/category_prod');
-;
 
 function saveCategory(req, res) {
     var params = req.body;
     var category = new Category();
-    category.name = params.name + '';
+    category.name = params.name;
     category.description = params.description;
     category.active = true;
-    Category.find({name:category.name}).exec((err, data) => {
+    Category.find({name: params.name}, (err, cat) => {
             if (err) return res.status(500).send({mesage: 'Error en la petición de categorias.'});
-             if (data && data.length > 1) {
-                return res.status(200).send({success:false, message: 'La categoría que intentas registrar ya existe.'})
+            if (cat && cat.length > 0) {
+                return res.status(200).send({success: false, message: 'La categoría que intentas registrar ya existe.'})
             } else {
                 category.save((err, datos) => {
                     if (err) return res.status(500).send({message: 'Error al guardar la categoría.'});
@@ -32,8 +31,7 @@ function saveCategory(req, res) {
                     }
                 });
             }
-        }
-    )
+        })
 }
 
 //-----------------------------------------------------------------------------------------------------//
@@ -65,7 +63,7 @@ function updateCategory(req, res) {
 
 function deleteCategory(req, res) {
     var catId = req.params.id;
-   Category.findOne({'_id': catId}).remove(err => {
+    Category.findOne({'_id': catId}).remove(err => {
         if (err)
             return res.status(500).send({success: false, message: 'Imposible borrar esta categoría.'});
         return res.status(200).send({success: true, message: 'La categoría ha sido borrado con éxito.'});
@@ -78,7 +76,7 @@ function getCategories(req, res) {
         page = req.params.page;
     }
     var itemsPerPage = 10;
-    Category.find({active: true}).sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
+    Category.find({active: req.query.active}).sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
         if (err) return res.status(500).send({message: 'Error en la peticion'});
         if (!datos) return res.status(400).send({message: 'No hay categorias disponibles.'});
         return res.status(200).send({
