@@ -26,11 +26,9 @@ export class ComborolesComponent implements OnInit {
   }
 
   getAll() {
-    this.service.getAll()
+    this.service.getAll(true)
         .subscribe(data => {
           this.data = data;
-        }, (error) => {
-
         })
   }
 

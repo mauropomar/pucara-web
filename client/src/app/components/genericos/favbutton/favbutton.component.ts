@@ -8,11 +8,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class FavbuttonComponent implements OnInit {
   @Input() color: string;
   @Output() addData: EventEmitter<number>;
-  @Output() showActive: EventEmitter<boolean>;
-  showAllActive:boolean = true;
+  @Output() clickActive: EventEmitter<boolean>;
+  showAllActive:boolean = false;
   constructor() {
     this.addData = new EventEmitter();
-    this.showActive = new EventEmitter();
+    this.clickActive = new EventEmitter();
   }
 
   ngOnInit() {
@@ -22,8 +22,8 @@ export class FavbuttonComponent implements OnInit {
     this.addData.emit();
   }
 
-  showActiveOption(val){
-    this.showAllActive = val;
-    this.showActive.emit(val);
+  showActive(val){
+    this.clickActive.emit(val);
+    this.showAllActive = !val;
   }
 }

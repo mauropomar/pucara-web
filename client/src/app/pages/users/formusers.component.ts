@@ -163,7 +163,7 @@ export class FormusersComponent implements OnInit {
         let url = this.url + 'upload-image-user/' + data.user._id;
         if (!this.file) {
             if (cerrar) {
-                this.router.navigate(['users/1']);
+                this.router.navigate(['home/users/1']);
             }
 
         }

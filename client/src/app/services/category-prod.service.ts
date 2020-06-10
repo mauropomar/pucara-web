@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {GlobalService} from './global.service';
 import {LoginService} from "./login.service";
-import {CategoryProdModel} from "../models/category_prod";
+import {CategoryProdModel} from "../models/category-prod";
 import {Observable} from "rxjs";
 
 @Injectable({

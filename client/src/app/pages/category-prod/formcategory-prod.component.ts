@@ -3,12 +3,9 @@ import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import {GlobalService} from "../../services/global.service";
-import {CategoryProdModel} from "../../models/category_prod";
-import {RolService} from "../../services/rols.service";
-import {LoginService} from "../../services/login.service";
+import {CategoryProdModel} from "../../models/category-prod";
 import {UtilService} from "../../services/util.service";
-import {RolModel} from "../../models/rol";
-import {CategoryProdService} from "../../services/category_prod.service";
+import {CategoryProdService} from "../../services/category-prod.service";
 
 @Component({
   selector: 'app-formcategory-prod',

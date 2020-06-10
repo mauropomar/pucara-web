@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryProdService} from "../../services/category_prod.service";
+import {CategoryProdService} from "../../services/category-prod.service";
 import {GlobalService} from "../../services/global.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UtilService} from "../../services/util.service";
@@ -81,5 +81,12 @@ export class ListcategoryProdComponent implements OnInit {
                 break
             }
         }
+    }
+
+    showOnlyActive(active) {
+        this.service.getAll(active)
+            .subscribe(data => {
+                this.categories = data;
+            })
     }
 }

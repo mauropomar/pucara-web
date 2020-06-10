@@ -2,7 +2,6 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-// Setting config for .env file
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -11,6 +10,8 @@ var app = express();
 var user_routes = require('./routes/user');
 var rol_routes = require('./routes/rol');
 var category_prod_routes = require('./routes/category_prod');
+var category_customer_routes = require('./routes/category_customer');
+var language_routes = require('./routes/language');
 
 //middleware
 
@@ -30,6 +31,8 @@ app.use((req, res, next) => {
 app.use('/api', user_routes);
 app.use('/api', rol_routes);
 app.use('/api', category_prod_routes);
+app.use('/api', category_customer_routes);
+app.use('/api', language_routes);
 
 
 //exportar

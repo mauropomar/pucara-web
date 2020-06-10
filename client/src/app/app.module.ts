@@ -26,6 +26,10 @@ import { ListrolsComponent } from './pages/rols/listrols.component';
 import { FormrolsComponent } from './pages/rols/formrols.component';
 import { ListcategoryProdComponent } from './pages/category-prod/listcategory-prod.component';
 import { FormcategoryProdComponent } from './pages/category-prod/formcategory-prod.component';
+import { ListcategoryCustomerComponent } from './pages/category-customer/listcategory-customer.component';
+import { FormcategoryCustomerComponent } from './pages/category-customer/formcategory-customer.component';
+import { ListlanguagesComponent } from './pages/languages/listlanguages.component';
+import { FormlanguageComponent } from './pages/languages/formlanguage.component';
 
 @NgModule({
     imports: [
@@ -53,7 +57,11 @@ import { FormcategoryProdComponent } from './pages/category-prod/formcategory-pr
         ListrolsComponent,
         FormrolsComponent,
         ListcategoryProdComponent,
-        FormcategoryProdComponent
+        FormcategoryProdComponent,
+        ListcategoryCustomerComponent,
+        FormcategoryCustomerComponent,
+        ListlanguagesComponent,
+        FormlanguageComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
