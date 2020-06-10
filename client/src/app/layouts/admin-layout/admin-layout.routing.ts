@@ -15,10 +15,16 @@ import {LoginComponent} from "../../pages/login/login.component";
 import {FormrolsComponent} from "../../pages/rols/formrols.component";
 import {ListcategoryProdComponent} from "../../pages/category-prod/listcategory-prod.component";
 import {FormcategoryProdComponent} from "../../pages/category-prod/formcategory-prod.component";
+import {FormcategoryCustomerComponent} from "../../pages/category-customer/formcategory-customer.component";
+import {ListcategoryCustomerComponent} from "../../pages/category-customer/listcategory-customer.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
+
+    {path: 'categorycustomer/new', component: FormcategoryCustomerComponent},
+    {path: 'categorycustomer/:id', component: FormcategoryCustomerComponent},
+    {path: 'categorycustomers/:page', component: ListcategoryCustomerComponent},
     {path: 'categoryprod/new', component: FormcategoryProdComponent},
     {path: 'categoryprod/:id', component: FormcategoryProdComponent},
     {path: 'categoryprods/:page', component: ListcategoryProdComponent},
