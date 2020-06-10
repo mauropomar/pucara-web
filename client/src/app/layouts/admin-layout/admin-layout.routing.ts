@@ -17,11 +17,16 @@ import {ListcategoryProdComponent} from "../../pages/category-prod/listcategory-
 import {FormcategoryProdComponent} from "../../pages/category-prod/formcategory-prod.component";
 import {FormcategoryCustomerComponent} from "../../pages/category-customer/formcategory-customer.component";
 import {ListcategoryCustomerComponent} from "../../pages/category-customer/listcategory-customer.component";
+import {ListlanguagesComponent} from "../../pages/languages/listlanguages.component";
+import {FormlanguageComponent} from "../../pages/languages/formlanguage.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
 
+    {path: 'language/new', component: FormlanguageComponent},
+    {path: 'language/:id', component: FormlanguageComponent},
+    {path: 'languages/:page', component: ListlanguagesComponent},
     {path: 'categorycustomer/new', component: FormcategoryCustomerComponent},
     {path: 'categorycustomer/:id', component: FormcategoryCustomerComponent},
     {path: 'categorycustomers/:page', component: ListcategoryCustomerComponent},
