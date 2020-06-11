@@ -86,4 +86,8 @@ export class NavbarComponent implements OnInit {
         localStorage.setItem('token', null);
        //this.router.navigate(['login']);
     }
+
+    goBack() {
+        this.location.back();
+    }
 }

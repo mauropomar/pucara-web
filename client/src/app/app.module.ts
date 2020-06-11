@@ -30,6 +30,7 @@ import { ListcategoryCustomerComponent } from './pages/category-customer/listcat
 import { FormcategoryCustomerComponent } from './pages/category-customer/formcategory-customer.component';
 import { ListlanguagesComponent } from './pages/languages/listlanguages.component';
 import { FormlanguageComponent } from './pages/languages/formlanguage.component';
+import { WindowsComponent } from './pages/windows/windows.component';
 
 @NgModule({
     imports: [
@@ -61,7 +62,8 @@ import { FormlanguageComponent } from './pages/languages/formlanguage.component'
         ListcategoryCustomerComponent,
         FormcategoryCustomerComponent,
         ListlanguagesComponent,
-        FormlanguageComponent
+        FormlanguageComponent,
+        WindowsComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
