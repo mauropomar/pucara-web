@@ -82,7 +82,7 @@ p {
 #login form span.fa {
     background-color: #fff;
     border-radius: 3px 0px 0px 3px;
-    color: #d44179;
+    color: black;
     display: block;
     float: left;
     height: 50px;
@@ -114,7 +114,7 @@ fieldset{
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
-    background-color: #d44179;
+    background-color: black;
     color: #eee;
     font-weight: bold;
     /* margin-bottom: 2em; */
