@@ -78,7 +78,11 @@ function getCategories(req, res) {
         page = req.params.page;
     }
     var itemsPerPage = 10;
-    Category.find({active: req.query.active}).sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
+    var query = null;
+    if (req.query.active == 'true') {
+        query = {active: true}
+    }
+    Category.find(query).sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
         if (err) return res.status(500).send({message: 'Error en la peticion'});
         if (!datos) return res.status(400).send({message: 'No hay categorias disponibles.'});
         return res.status(200).send({

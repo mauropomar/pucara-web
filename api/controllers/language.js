@@ -12,37 +12,33 @@ var Language = require('../models/language');
 
 function saveLanguage(req, res) {
     var params = req.body;
-    var lan = new Languages();
-    lan.identity = params.identifier;
+    var lan = new Language();
+    lan.code = params.code;
     lan.name = params.name;
     lan.description = params.description;
+    lan.active = params.active;
     lan.flag = null;
     Language.find({
-        $or: [{identity: lan.identity.toLowerCase()},
-            {name: lan.name.toLowerCase()}]
-    }).exec((err, langs) => {
-            if (err) return res.status(500).send({success: false, message: 'Error en la petición de usuarios.'});
-            if (langs && langs.length > 1) {
+        $or: [{code: lan.code},
+            {name: lan.name}]
+    }, (err, langs)  => {
+            if (langs && langs.length > 0) {
                 return res.status(200).send({success: false, message: 'El idioma que intentas registrar ya existe.'})
             } else {
-                bcrypt.hash(params.password, null, null, (err, hash) => {
-                    user.password = hash;
-                    user.save((err, userStore) => {
-                        if (err) return res.status(500).send({message: 'Error al guardar el idioma'});
-                        if (userStore) {
-                            res.status(200).send({
-                                user: userStore,
-                                message: 'El idioma fue registrado con éxito',
-                                success: true
-                            });
-                        } else {
-                            res.status(404).send({message: 'No se ha registrado el idioma'});
-                        }
-                    });
+                lan.save((err, datos) => {
+                    if (err) return res.status(500).send({message: 'Error al guardar el idioma'});
+                    if (datos) {
+                        res.status(200).send({
+                            datos: datos,
+                            message: 'El idioma fue registrado con éxito',
+                            success: true
+                        });
+                    } else {
+                        res.status(404).send({message: 'No se ha registrado el idioma'});
+                    }
                 });
             }
-        }
-    )
+    })
 }
 
 
@@ -52,8 +48,8 @@ function updateLanguage(req, res) {
     var lanId = req.params.id;
     var update = req.body;
     Language.find({
-        $or: [{identity: lan.identity.toLowerCase()},
-            {name: lan.name.toLowerCase()}]
+        $or: [{code: update.code.toLowerCase()},
+            {name: update.name.toLowerCase()}]
     }).exec((err, langs) => {
         var lang_isset = false;
         langs.forEach((lang) => {
@@ -71,7 +67,7 @@ function updateLanguage(req, res) {
                 message: 'No se ha podido actualizar.'
             });
             return res.status(200).send({
-                language: data,
+                datos: data,
                 message: 'El idioma fue actualizado con éxito',
                 success: true
             });
@@ -101,7 +97,11 @@ function getLanguages(req, res) {
         page = req.params.page;
     }
     var itemsPerPage = 10;
-    Language.find().sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
+    var query = null;
+    if (req.query.active == 'true') {
+        query = {active: true}
+    }
+    Language.find(query).sort('_id').paginate(page, itemsPerPage, (err, datos, total) => {
         if (err) return res.status(500).send({message: 'Error en la peticion'});
         if (!datos) return res.status(400).send({message: 'No hay idiomas disponibles.'});
         return res.status(200).send({
@@ -115,21 +115,22 @@ function getLanguages(req, res) {
 //--------------------------------------Upload image----------------------------------------------//
 
 function uploadImage(req, res) {
-    var userId = req.params.id;
+    var lanId = req.params.id;
 
     if (req.files) {
         var file_path = req.files.flag.path;
-        //  console.log(file_path);
+
         var file_split = file_path.split('\\');
         //   console.log(file_split);
         var file_name = file_split[2];
         var ext_split = file_name.split('\.');
         var file_ext = ext_split[1];
-       if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
-            Language.findByIdAndUpdate(userId, {flag: file_name}, {new: true}, (err, datos) => {
+        console.log(lanId);
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
+            Language.findByIdAndUpdate(lanId, {flag: file_name}, {new: true}, (err, datos) => {
                 if (err) return res.status(500).send({message: 'Error en la peticion.'});
                 if (!datos) return res.status(404).send({message: 'No se ha podido actualizar.'});
-                return res.status(200).send({user: datos});
+                return res.status(200).send({language: datos});
             })
         } else {
             return removeFilePathUploads(res, file_path, 'Extensión no válida.');

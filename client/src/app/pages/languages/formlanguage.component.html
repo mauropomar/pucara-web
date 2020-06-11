@@ -1,1 +1,129 @@
-<p>formlanguage works!</p>
+<div class="main-content"  #customLoadingformlanguageTemplate>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">{{title}}</h4>
+                    </div>
+                    <div class="content">
+                        <form [formGroup]="forma" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('code').valid}">
+                                        <label>Identificador <a style="color:red">*</a></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Identificador"
+                                               [(ngModel)]="lang.code"
+                                               formControlName="code">
+                                        <div class="haserror" *ngIf="forma.get('code').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('code').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('name').valid}">
+                                        <label>Nombre <a style="color:red">*</a></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Nombre"
+                                               [(ngModel)]="lang.name"
+                                               formControlName="name">
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Descripción</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Descripción"
+                                               formControlName="description"
+                                               [(ngModel)]="lang.description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="file-field">
+                                        <div class="btn btn-secondary btn-sm float-left">
+                                            <input type="file" #file
+                                                   accept='image/*'
+                                                   (change)="preview(file.files);">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" *ngIf="editando">
+                                    <div class="form-group">
+                                        <label>Activo:</label>
+                                        <input label="Activo" formControlName="active" [(ngModel)]="lang.active" class="form-check-input" type="checkbox" style="margin-left:6px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit"
+                                    class="btn-fill pull-right"
+                                    (click)="cancel()"
+                            ><i class="material-icons">cancel</i>
+                                Cancelar
+                            </button>
+                            <button type="submit" mat-raised-button
+                                    [disabled]="!forma.valid"
+                                    (click)="insert(true)"
+                                    class="btn-fill pull-right"
+                                    style="margin-right:5px;">
+                                <i class="material-icons">done_outline</i>
+                                Aceptar
+                            </button>
+                            <button mat-raised-button type="submit"
+                                    [disabled]="!forma.valid"
+                                    *ngIf="!editando"
+                                    (click)="insert(false)"
+                                    class="btn-fill pull-right"
+                                    style="margin-right:5px;">
+                                <i class="material-icons">add</i>
+                                Agregar
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="../../../assets/img/licores.jpg"
+                             alt="..."/>
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                            <a href="#">
+                                <img class="avatar border-gray" src="{{(!ischangeImage && lang.flag != null)?url+'get-image-language/'+lang.flag:lang.flag | noimageuser}}" alt="..."/>
+
+                                <h4 class="title">{{lang.code}}<br/>
+                                    <small>{{lang.name}}</small>
+                                </h4>
+                            </a>
+                        </div>
+                        <p class="description text-center">
+                           {{lang.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ngx-loading [show]="showLoading" [config]="{ backdropBorderRadius: '3px' }"
+                         [template]="customLoadingformlanguageTemplate"></ngx-loading>
+        </div>
+    </div>
+</div>
+

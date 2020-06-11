@@ -89,8 +89,8 @@ export class ListlanguagesComponent implements OnInit {
     }
   }
 
-  showOnlyActive(active) {
-    this.service.getAll(active)
+  showOnlyActive($event: boolean) {
+    this.service.getAll($event)
         .subscribe(data => {
           this.languages = data;
         })

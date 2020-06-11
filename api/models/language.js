@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LanguageSchema = Schema({
-    identity: String,
+    code: String,
     name: String,
     description: String,
-    image:String,
+    flag:String,
     active:Boolean
 });
 

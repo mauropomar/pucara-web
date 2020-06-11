@@ -1,7 +1,7 @@
 export interface LanguageModel {
-    identity:string;
+    code:string;
     name:string;
     description:string;
-    flag:string;
+    flag:any;
     active:boolean;
 }

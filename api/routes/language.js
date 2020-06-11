@@ -8,7 +8,7 @@ var md_upload = multipart({uploadDir: './uploads/languages'});
 
 var api = express.Router();
 var md_auth = require('../middlewares/authenticated');
-api.post('/register', Controller.saveLanguage);
+api.post('/register-language', Controller.saveLanguage);
 api.get('/language/:id', md_auth.ensureAuth, Controller.getLanguage);
 api.get('/languages/:page?', md_auth.ensureAuth, Controller.getLanguages);
 api.put('/update-language/:id', md_auth.ensureAuth, Controller.updateLanguage);
