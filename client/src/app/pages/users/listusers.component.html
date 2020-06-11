@@ -1,0 +1,72 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <h4 class="title">Usuarios</h4>
+                                        <p class="category" style="padding-bottom:10px ">Listado de usuarios del sistema</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button *ngIf="page > 1"  mat-fab
+                                        data-toggle="tooltip" data-placement="top" title="Anterior"
+                                        class="button-filter"
+                                        (click)="previous()">
+                                    <i class="material-icons">arrow_back</i>
+                                </button>
+                                <button *ngIf="pages > page" mat-fab
+                                        data-placement="top" title="Siguiente"
+                                        class="button-filter"
+                                        (click)="next()">
+                                    <i class="material-icons">arrow_forward</i>
+
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th></th>
+                            <th>Nombre y Apellidos</th>
+                            <th>Cuenta</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            </thead>
+                            <tbody>
+                            <ng-container *ngFor="let item of users">
+                                <tr>
+                                    <td><img width="50" height="50"
+                                             src="{{url+'get-image-user/'+item.image | noimageuser}}"
+                                             alt="..."></td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.username}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.rol.name}}</td>
+                                    <td class="td-actions text-right">
+                                        <button type="button" mat-fab class="btn btn-primary" (click)="edit(item)" data-toggle="tooltip" data-placement="top" title="Editar">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                        <button type="button"mat-fab  class="btn btn-danger" (click)="showConfirmDelete(item)" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-favbutton (addData)="create()"></app-favbutton>
+    <app-confirmdelete [message]="messagedelete" (deleteEvent)="delete()"></app-confirmdelete>
+</div>
+
