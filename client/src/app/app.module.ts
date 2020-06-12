@@ -30,7 +30,10 @@ import { ListcategoryCustomerComponent } from './pages/category-customer/listcat
 import { FormcategoryCustomerComponent } from './pages/category-customer/formcategory-customer.component';
 import { ListlanguagesComponent } from './pages/languages/listlanguages.component';
 import { FormlanguageComponent } from './pages/languages/formlanguage.component';
-import { WindowsComponent } from './pages/windows/windows.component';
+import { ListwindowsComponent } from './pages/windows/listwindows.component';
+import { FormwindowComponent } from './pages/windows/formwindow.component';
+import { ListbrandsComponent } from './pages/brands/listbrands.component';
+import { FormbrandComponent } from './pages/brands/formbrand.component';
 
 @NgModule({
     imports: [
@@ -63,7 +66,10 @@ import { WindowsComponent } from './pages/windows/windows.component';
         FormcategoryCustomerComponent,
         ListlanguagesComponent,
         FormlanguageComponent,
-        WindowsComponent
+        ListwindowsComponent,
+        FormwindowComponent,
+        ListbrandsComponent,
+        FormbrandComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

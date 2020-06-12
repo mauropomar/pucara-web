@@ -19,11 +19,20 @@ import {FormcategoryCustomerComponent} from "../../pages/category-customer/formc
 import {ListcategoryCustomerComponent} from "../../pages/category-customer/listcategory-customer.component";
 import {ListlanguagesComponent} from "../../pages/languages/listlanguages.component";
 import {FormlanguageComponent} from "../../pages/languages/formlanguage.component";
+import {ListwindowsComponent} from "../../pages/windows/listwindows.component";
+import {FormwindowComponent} from "../../pages/windows/formwindow.component";
+import {ListbrandsComponent} from "../../pages/brands/listbrands.component";
+import {FormbrandComponent} from "../../pages/brands/formbrand.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
-
+    {path: 'brand/new', component: FormbrandComponent},
+    {path: 'brand/:id', component: FormbrandComponent},
+    {path: 'brands/:page', component: ListbrandsComponent},
+    {path: 'window/new', component: FormwindowComponent},
+    {path: 'window/:id', component: FormwindowComponent},
+    {path: 'windows/:page', component: ListwindowsComponent},
     {path: 'language/new', component: FormlanguageComponent},
     {path: 'language/:id', component: FormlanguageComponent},
     {path: 'languages/:page', component: ListlanguagesComponent},

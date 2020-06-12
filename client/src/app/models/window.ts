@@ -1,2 +1,4 @@
-export interface Window {
+export interface WindowModel {
+    name:string;
+    active:boolean
 }

@@ -1,37 +1,37 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {GlobalService} from './global.service';
 import {LoginService} from "./login.service";
-import {WindowModel} from "../models/window";
+import {BrandModel} from "../models/brand";
 import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WindowService {
+export class BrandService {
   public url: string;
   constructor(private http: HttpClient, public global: GlobalService,
               private loginService: LoginService) {
     this.url = global.url;
   }
 
-  register(window: WindowModel): Observable<any> {
-    let params = JSON.stringify(window);
+  register(brand: BrandModel): Observable<any> {
+    let params = JSON.stringify(brand);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', this.loginService.getToken());
-    let url = this.url + 'register-window';
+    let url = this.url + 'register-brand';
     return this.http.post(url, params, {headers: headers})
         .pipe(map(response => {
           return response
         }));
   }
 
-  update(window: WindowModel): Observable<any> {
-    let params = JSON.stringify(window);
+  update(brand: BrandModel): Observable<any> {
+    let params = JSON.stringify(brand);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', this.loginService.getToken());
-    let url = this.url + 'update-window/' + window['_id'];
+    let url = this.url + 'update-brand/' + brand['_id'];
     return this.http.put(url, params, {headers: headers})
         .pipe(map(response => {
           return response
@@ -42,7 +42,7 @@ export class WindowService {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', this.loginService.getToken());
     let page = 1;
-    let url = this.url + 'windows/'+page;
+    let url = this.url + 'brands/'+page;
     let params = new HttpParams({
       fromObject: {
         active: active
@@ -55,16 +55,16 @@ export class WindowService {
   getOne(id) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', this.loginService.getToken());
-    let url = this.url + 'window/' + id;
+    let url = this.url + 'brand/' + id;
     return this.http.get(url, {headers: headers})
         .pipe(map(data => data['datos']));
   }
 
-  delete(window) {
-    let params = JSON.stringify(window);
+  delete(brand) {
+    let params = JSON.stringify(brand);
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', this.loginService.getToken());
-    let url = this.url + 'delete-window/' + window['_id'];
+    let url = this.url + 'delete-brand/' + brand['_id'];
     return this.http.delete(url, {headers: headers})
         .pipe(map(response => {
           return response
