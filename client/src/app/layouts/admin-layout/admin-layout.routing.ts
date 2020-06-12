@@ -23,10 +23,15 @@ import {ListwindowsComponent} from "../../pages/windows/listwindows.component";
 import {FormwindowComponent} from "../../pages/windows/formwindow.component";
 import {ListbrandsComponent} from "../../pages/brands/listbrands.component";
 import {FormbrandComponent} from "../../pages/brands/formbrand.component";
+import {ListumComponent} from "../../pages/ums/listum.component";
+import {FormumComponent} from "../../pages/ums/formum.component"
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
+    {path: 'um/new', component: FormumComponent},
+    {path: 'um/:id', component: FormumComponent},
+    {path: 'ums/:page', component: ListumComponent},
     {path: 'brand/new', component: FormbrandComponent},
     {path: 'brand/:id', component: FormbrandComponent},
     {path: 'brands/:page', component: ListbrandsComponent},

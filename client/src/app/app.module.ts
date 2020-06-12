@@ -34,6 +34,8 @@ import { ListwindowsComponent } from './pages/windows/listwindows.component';
 import { FormwindowComponent } from './pages/windows/formwindow.component';
 import { ListbrandsComponent } from './pages/brands/listbrands.component';
 import { FormbrandComponent } from './pages/brands/formbrand.component';
+import { ListumComponent } from './pages/ums/listum.component';
+import { FormumComponent } from './pages/ums/formum.component';
 
 @NgModule({
     imports: [
@@ -69,7 +71,9 @@ import { FormbrandComponent } from './pages/brands/formbrand.component';
         ListwindowsComponent,
         FormwindowComponent,
         ListbrandsComponent,
-        FormbrandComponent
+        FormbrandComponent,
+        ListumComponent,
+        FormumComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
