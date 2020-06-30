@@ -15,6 +15,7 @@ var language_routes = require('./routes/language');
 var window_routes = require('./routes/window');
 var brand_routes = require('./routes/brand');
 var um_routes = require('./routes/um');
+var menu_routes = require('./routes/menu');
 
 //middleware
 
@@ -39,6 +40,7 @@ app.use('/api', language_routes);
 app.use('/api', window_routes);
 app.use('/api', brand_routes);
 app.use('/api', um_routes);
+app.use('/api', menu_routes);
 
 
 //exportar

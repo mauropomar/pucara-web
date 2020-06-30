@@ -9,6 +9,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
    // { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
+   { path: '/home/menus/1', title: 'Menú',  icon:'pe-7s-menu', class: '' },
    { path: '/home/ums/1', title: 'Unidad Medida',  icon:'pe-7s-photo-gallery', class: '' },
     { path: '/home/brands/1', title: 'Marcas',  icon:'pe-7s-ribbon', class: '' },
     { path: '/home/windows/1', title: 'Ventanas',  icon:'pe-7s-browser', class: '' },
@@ -20,7 +21,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/home/rols', title: 'Roles',  icon:'pe-7s-user', class: '' },
   //  { path: '/table', title: 'Table List',  icon:'pe-7s-note2', class: '' },
   //  { path: '/typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '' },
- //   { path: '/home/icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
+    { path: '/home/icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
  //   { path: '/maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '' },
   //  { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
   //  { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },

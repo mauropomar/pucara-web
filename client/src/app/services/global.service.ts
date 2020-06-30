@@ -13,6 +13,7 @@ export class GlobalService {
     public title = '';
     public showLoading: boolean = false;
     public titlemodal: string = '';
+    public languageId: string = '';
 
     constructor() {
     }

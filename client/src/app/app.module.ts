@@ -36,6 +36,8 @@ import { ListbrandsComponent } from './pages/brands/listbrands.component';
 import { FormbrandComponent } from './pages/brands/formbrand.component';
 import { ListumComponent } from './pages/ums/listum.component';
 import { FormumComponent } from './pages/ums/formum.component';
+import { ListmenuComponent } from './pages/menu/listmenu.component';
+import { FormmenuComponent } from './pages/menu/formmenu.component';
 
 @NgModule({
     imports: [
@@ -73,7 +75,9 @@ import { FormumComponent } from './pages/ums/formum.component';
         ListbrandsComponent,
         FormbrandComponent,
         ListumComponent,
-        FormumComponent
+        FormumComponent,
+        ListmenuComponent,
+        FormmenuComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

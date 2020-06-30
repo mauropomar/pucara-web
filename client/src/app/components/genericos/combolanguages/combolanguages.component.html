@@ -1,0 +1,7 @@
+<div>
+    <select [(ngModel)]="selected" class="form-control" (change) = "seleccionar($event.target.value)" placeholder="Lenguaje" name="language"
+            required>
+        <option value="">Seleccione un lenguaje</option>
+        <option *ngFor="let r of data" [value]="r._id">{{r.name}}</option>
+    </select>
+</div>
