@@ -1,7 +1,7 @@
 'use strict'
 
 var express = require('express');
-var CustomerController = require('../controllers/category_customer');
+var CustomerController = require('../controllers/customer');
 var multipart = require('connect-multiparty');
 var md_auth = require('../middlewares/authenticated');
 

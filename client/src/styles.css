@@ -37,9 +37,9 @@ button[type="submit"]{
 
 table th{
     font-weight: bold;
-    text-align: center
+    text-align: left
 }
 
 table td{
-    text-align: center
+    text-align: left
 }

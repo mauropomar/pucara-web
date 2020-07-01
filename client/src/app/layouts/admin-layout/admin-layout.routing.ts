@@ -27,10 +27,12 @@ import {ListumComponent} from "../../pages/ums/listum.component";
 import {FormumComponent} from "../../pages/ums/formum.component";
 import {ListmenuComponent} from "../../pages/menu/listmenu.component";
 import {FormmenuComponent} from "../../pages/menu/formmenu.component";
+import {ListcustomerComponent} from "../../pages/customer/listcustomer.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     {path: 'dashboard', component: HomeComponent},
+    {path: 'customers/:page', component: ListcustomerComponent},
     {path: 'menu/new/:lang', component: FormmenuComponent},
     {path: 'menu/:id/:lang', component: FormmenuComponent},
     {path: 'menus/:page', component: ListmenuComponent},

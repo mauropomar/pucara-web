@@ -38,6 +38,8 @@ import { ListumComponent } from './pages/ums/listum.component';
 import { FormumComponent } from './pages/ums/formum.component';
 import { ListmenuComponent } from './pages/menu/listmenu.component';
 import { FormmenuComponent } from './pages/menu/formmenu.component';
+import { ListcustomerComponent } from './pages/customer/listcustomer.component';
+import { FormcustomerComponent } from './pages/customer/formcustomer.component';
 
 @NgModule({
     imports: [
@@ -77,7 +79,9 @@ import { FormmenuComponent } from './pages/menu/formmenu.component';
         ListumComponent,
         FormumComponent,
         ListmenuComponent,
-        FormmenuComponent
+        FormmenuComponent,
+        ListcustomerComponent,
+        FormcustomerComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
