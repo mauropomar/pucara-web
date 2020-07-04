@@ -1,1 +1,141 @@
-<p>formcustomer works!</p>
+
+<div class="main-content"  #customLoadingformusuarioTemplate>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header" style="height: 60px">
+                        <h4 class="title">{{title}}</h4>
+                    </div>
+                    <div class="content">
+                        <form [formGroup]="forma" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('code').valid}">
+                                        <label>Identificador <a style="color:red">*</a></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Identificador"
+                                               [(ngModel)]="customer.code"
+                                               formControlName="code">
+                                        <div class="haserror" *ngIf="forma.get('code').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('code').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('name').valid}">
+                                        <label>Nombre y Apellidos <a style="color:red">*</a></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Nombre"
+                                               [(ngModel)]="customer.name"
+                                               formControlName="name">
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                     
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Descripción</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Descripción"
+                                               formControlName="description"
+                                               [(ngModel)]="customer.description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('credit').valid}">
+                                        <label>Crédito <a style="color:red">*</a></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Crédito"
+                                               [(ngModel)]="customer.credit"
+                                               formControlName="credit">
+                                        <div class="haserror" *ngIf="forma.get('credit').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('credit').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('deactivationDate').valid}">
+                                        <label>Fecha de desactivación<a style="color:red">*</a></label>
+                                        <input type="date"
+                                               class="form-control"
+                                               [(ngModel)]="customer.deactivationDate"
+                                               format = "dd/mm/yyyy"
+                                               formControlName="deactivationDate">
+                                        <div class="haserror" *ngIf="forma.get('deactivationDate').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Motivos de desactivación</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               formControlName="deactivationReason"
+                                               [(ngModel)]="customer.deactivationReason">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="editando">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Activo:</label>
+                                        <input label="Activo" formControlName="active" [(ngModel)]="customer.active" class="form-check-input" type="checkbox" style="margin-left:6px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit"
+                                    class="btn-fill pull-right"
+                                    (click)="cancel()"
+                            ><i class="material-icons">cancel</i>
+                                Cancelar
+                            </button>
+                            <button type="submit" mat-raised-button
+                                    [disabled]="!forma.valid"
+                                    (click)="insert(true)"
+                                    class="btn-fill pull-right"
+                                    style="margin-right:5px;">
+                                <i class="material-icons">done_outline</i>
+                                Aceptar
+                            </button>
+                            <button mat-raised-button type="submit"
+                                    [disabled]="!forma.valid"
+                                    *ngIf="!editando"
+                                    (click)="insert(false)"
+                                    class="btn-fill pull-right"
+                                    style="margin-right:5px;">
+                                <i class="material-icons">add</i>
+                                Agregar
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <ngx-loading [show]="showLoading" [config]="{ backdropBorderRadius: '3px' }"
+                         [template]="customLoadingformusuarioTemplate"></ngx-loading>
+        </div>
+    </div>
+</div>
+
