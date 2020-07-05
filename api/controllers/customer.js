@@ -19,7 +19,7 @@ function saveCustomer(req, res) {
     customer.deactivationDate = params.deactivationDate;
     customer.deactivationReason = params.deactivationReason;
     customer.active = true;
-    Customer.find({ code: customer.code, name: customer.name }).exec((err, data) => {
+    Customer.find({ code: params.code }, (err, data) => {
         if (err) return res.status(500).send({ mesage: 'Error en la petición de clientes.' });
         if (data && data.length > 1) {
             return res.status(200).send({ success: false, message: 'El cliente que intentas registrar ya existe.' })
@@ -44,19 +44,19 @@ function saveCustomer(req, res) {
 //-----------------------------------------------------------------------------------------------------//
 //editar los datos del usuario
 function updateCustomer(req, res) {
-    var catId = req.params.id;
+    var cusId = req.params.id;
     var update = req.body;
-    Customer.find({ name: update.name.toLowerCase() }, (err, cat) => {
-        var cat_isset = false;
-        cat.forEach((p) => {
-            if (p && p._id != catId)
-                cat_isset = true
+    Customer.find({ code: update.code }, (err, cust) => {
+        var cust_isset = false;
+        cust.forEach((p) => {
+            if (p && p._id != cusId)
+                cust_isset = true
         });
-        if (cat_isset) return res.status(200).send({
+        if (cust_isset) return res.status(200).send({
             success: false,
             message: 'El cliente que intentas actualizar ya existe.'
         });
-        Customer.findByIdAndUpdate(catId, update, { new: true }, (err, datos) => {
+        Customer.findByIdAndUpdate(cusId, update, { new: true }, (err, datos) => {
             if (err) return res.status(500).send({ success: false, message: 'Error en la peticion.' });
             if (!datos) return res.status(404).send({ success: false, message: 'No se ha podido actualizar.' });
             return res.status(200).send({

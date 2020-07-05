@@ -25,7 +25,7 @@ export class ListcustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.global.title = 'Categorías de Productos';
+      this.global.title = 'Clientes';
       //  this.getTable();
       this.actualPage();
   }

@@ -6,7 +6,7 @@ import { GlobalService } from "../../services/global.service";
 import { CustomerModel } from "../../models/customer";
 import { UtilService } from "../../services/util.service";
 import { CustomerService } from "../../services/customer.service";
-
+declare var $: any;
 @Component({
   selector: 'app-formcustomer',
   templateUrl: './formcustomer.component.html',
@@ -24,7 +24,7 @@ export class FormcustomerComponent implements OnInit {
     name: string;
     description: string;
     credit: number;
-    deactivationDate: Date;
+    deactivationDate: String;
     deactivationReason: string;
     active: boolean = true;
   };
@@ -64,6 +64,7 @@ export class FormcustomerComponent implements OnInit {
     this.service.getOne(id)
       .subscribe(data => {
         this.customer = data;
+        this.customer.deactivationDate = this.global.getStringDate(data.deactivationDate, 'yy-mm-dd');
       })
   }
 
@@ -112,7 +113,7 @@ export class FormcustomerComponent implements OnInit {
     this.customer.description = '';
     this.customer.deactivationReason = '';
     this.customer.credit = null;
-    this.customer.deactivationDate = new Date();
+    this.customer.deactivationDate = '';
   }
 
 }

@@ -12,6 +12,7 @@ import {SidebarModule} from './sidebar/sidebar.module';
 import {MaterialModule} from './material/material.module';
 import {ComponentModule} from "./components/component.module";
 import {NgxLoadingModule} from 'ngx-loading';
+import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import {AppComponent} from './app.component';
 
@@ -55,7 +56,8 @@ import { FormcustomerComponent } from './pages/customer/formcustomer.component';
         ComponentModule,
         NgxLoadingModule.forRoot({}),
         AppRoutingModule,
-        MatTooltipModule
+        MatTooltipModule,
+        BsDatepickerModule.forRoot()
     ],
     declarations: [
         AppComponent,

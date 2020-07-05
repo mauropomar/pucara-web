@@ -3,7 +3,7 @@ export interface CustomerModel {
     name:string;
     description:string;
     credit:number;
-    deactivationDate:Date,
+    deactivationDate:String,
     deactivationReason:string,
     active:boolean;
 }
