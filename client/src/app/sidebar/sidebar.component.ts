@@ -12,7 +12,7 @@ export const ROUTES: RouteInfo[] = [
 
   { path: '/home/menus/1', title: 'Menú', icon: 'menu', class: '' },
   { path: '/home/ums/1', title: 'Unidad Medida', icon: 'ac_unit', class: '' },
-  { path: '/home/brands/1', title: 'Marcas', icon: 'flag', class: '' },
+  { path: '/home/brands/1', title: 'Marcas', icon: 'assistant_photo', class: '' },
   { path: '/home/windows/1', title: 'Ventanas', icon: 'desktop_windows', class: '' },
   { path: '/home/languages/1', title: 'Idiomas', icon: 'language', class: '' },
   { path: '/home/categorycustomers/1', title: 'Categoría Clientes', icon: 'contact_mail', class: '' },
