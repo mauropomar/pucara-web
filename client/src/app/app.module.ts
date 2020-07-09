@@ -41,6 +41,8 @@ import { ListmenuComponent } from './pages/menu/listmenu.component';
 import { FormmenuComponent } from './pages/menu/formmenu.component';
 import { ListcustomerComponent } from './pages/customer/listcustomer.component';
 import { FormcustomerComponent } from './pages/customer/formcustomer.component';
+import { ListproductsComponent } from './pages/products/listproducts.component';
+import { FormproductComponent } from './pages/products/formproduct.component';
 
 @NgModule({
     imports: [
@@ -83,7 +85,9 @@ import { FormcustomerComponent } from './pages/customer/formcustomer.component';
         ListmenuComponent,
         FormmenuComponent,
         ListcustomerComponent,
-        FormcustomerComponent
+        FormcustomerComponent,
+        ListproductsComponent,
+        FormproductComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
