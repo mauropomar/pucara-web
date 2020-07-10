@@ -8,6 +8,7 @@ import {UsersService} from "../../services/users.service";
 import {UploadService} from "../../services/upload.service";
 import {LoginService} from "../../services/login.service";
 import {UtilService} from "../../services/util.service";
+import { CritojsService } from '../../services/critojs.service';
 
 @Component({
     selector: 'app-formusers',
@@ -36,13 +37,11 @@ export class FormusersComponent implements OnInit {
         image: any;
     };
 
-    constructor(private activateRoute: ActivatedRoute,
-                private global: GlobalService,
-                private router: Router,
-                private userService: UsersService,
-                private loginService: LoginService,
-                private uploadService: UploadService,
-                private util: UtilService) {
+    constructor(private activateRoute: ActivatedRoute, private global: GlobalService,
+                private router: Router, private userService: UsersService,
+                private loginService: LoginService,  private uploadService: UploadService,
+                private util: UtilService, private critoJs:CritojsService) {
+                    
         this.url = global.url;
         this.token = this.loginService.getToken();
         this.activateRoute.params.subscribe(params => {

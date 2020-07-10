@@ -11,7 +11,7 @@ export class NoimageuserPipe implements PipeTransform {
 
     transform(value: string): string {
         if (value == null || value.indexOf('empty') > -1 || value.indexOf('null') > -1 || value.indexOf('undefined') > -1) {
-            return this.global.urlassets + 'assets/img/default-user.png'
+            return this.global.urlassets + 'assets/img/noimage.png'
         }
         return value;
     }
