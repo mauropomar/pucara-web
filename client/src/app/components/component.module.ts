@@ -9,11 +9,12 @@ import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../material/material.module";
 import { ConfirmdeleteComponent } from './genericos/confirmdelete/confirmdelete.component';
 import { CombolanguagesComponent } from './genericos/combolanguages/combolanguages.component';
+import { CombobrandsComponent } from './genericos/combobrands/combobrands.component';
 
 
 
 @NgModule({
-    declarations: [FavbuttonComponent, ComborolesComponent, ConfirmdeleteComponent, CombolanguagesComponent],
+    declarations: [FavbuttonComponent, ComborolesComponent, ConfirmdeleteComponent, CombolanguagesComponent, CombobrandsComponent],
     exports: [
         ComborolesComponent,
         CombolanguagesComponent,
