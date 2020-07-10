@@ -20,7 +20,7 @@ var ProductSchema = Schema({
     minstock:Number,
     tarifa:String,
     available:Number,
-    maxwidht:Number,
+    maxwidth:Number,
     minheight:Number,
     maxlenght:Number,
     caracterist:String,

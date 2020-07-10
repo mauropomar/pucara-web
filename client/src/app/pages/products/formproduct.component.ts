@@ -71,10 +71,17 @@ export class FormproductComponent implements OnInit {
       this.forma = new FormGroup({
           code: new FormControl('', [Validators.required, Validators.minLength(1)]),
           name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+          price:new FormControl('', [Validators.required]),
+          discount:new FormControl('', [Validators.required]),
           description: new FormControl(''),
+          recomended: new FormControl(''),
+          mostused: new FormControl(''),
+          duodate:new FormControl('', [Validators.required]),
+          volume:new FormControl('', [Validators.required]),
+          minstock:new FormControl('', [Validators.required]),
+          weight:new FormControl('', [Validators.required]),
           active: new FormControl('')
       })
-
   }
 
   ngOnInit(): void {
@@ -157,7 +164,7 @@ export class FormproductComponent implements OnInit {
   }
 
   cancel() {
-      this.router.navigate(["home/languages/1"]);
+      this.router.navigate(["home/products/1"]);
   }
 
   getOne(id) {
@@ -170,7 +177,17 @@ export class FormproductComponent implements OnInit {
   resetFields() {
       this.prod.code = '';
       this.prod.name = '';
+      this.prod.brand = '';
+      this.prod.uom = '';
+      this.prod.available = null;
+      this.prod.discount = null;
+      this.prod.duodate = new Date();
+      this.prod.maxwidth = null;
+      this.prod.maxlenght = null;
+      this.prod.recomended = false;
+      this.prod.minstock = null;
       this.prod.description = '';
+      this.prod.caracterist = '';
       this.prod.image = null;
   }
 

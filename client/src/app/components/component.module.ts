@@ -18,6 +18,7 @@ import { CombobrandsComponent } from './genericos/combobrands/combobrands.compon
     exports: [
         ComborolesComponent,
         CombolanguagesComponent,
+        CombobrandsComponent,
         FavbuttonComponent,
         ConfirmdeleteComponent
     ],

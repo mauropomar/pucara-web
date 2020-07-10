@@ -1,1 +1,7 @@
-<p>combobrands works!</p>
+<div>
+        <select [(ngModel)]="selected" class="form-control" (change) = "seleccionar($event.target.value)" placeholder="Marca" name="marca"
+                required>
+            <option value="">Seleccione una marca</option>
+            <option *ngFor="let r of data" [value]="r._id">{{r.name}}</option>
+        </select>
+    </div>

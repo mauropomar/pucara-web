@@ -1,1 +1,208 @@
-<p>formproduct works!</p>
+<div class="main-content" #customLoadingformproductTemplate>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header" style="height: 60px">
+                        <h4 class="title">{{title}}</h4>
+                    </div>
+                    <div class="content">
+                        <form [formGroup]="forma" novalidate="novalidate">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('code').valid}">
+                                        <label>Identificador <a style="color:red">*</a></label>
+                                        <input type="text" class="form-control" placeholder="Identificador" [(ngModel)]="prod.code"
+                                            formControlName="code">
+                                        <div class="haserror" *ngIf="forma.get('code').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('code').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Marca <a style="color:red">*</a></label>
+                                        <app-combobrands (changeValue)="prod.brand=$event" [selected]="prod.brand"></app-combobrands>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('name').valid}">
+                                        <label>Nombre <a style="color:red">*</a></label>
+                                        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="prod.name"
+                                            formControlName="name">
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                        <div class="haserror" *ngIf="forma.get('name').errors?.minlength">
+                                            Por lo menos 5 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>UOM<a style="color:red">*</a></label>
+                                        <select [(ngModel)]="prod.uom" class="form-control" (change)="prod.uom=$event.target.value"
+                                            placeholder="Uom" name="Uom" required>
+                                            <option value="">seleccione uom</option>
+                                            <option [value]="1">KM12WE</option>
+                                            <option [value]="2">KM12WER</option>
+                                            <option [value]="3">KM12TSER</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('price').valid}">
+                                        <label>Precio <a style="color:red">*</a></label>
+                                        <input type="number" class="form-control" placeholder="Precio" [(ngModel)]="prod.price"
+                                            formControlName="price">
+                                        <div class="haserror" *ngIf="forma.get('price').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('discount').valid}">
+                                        <label>% Discount <a style="color:red">*</a></label>
+                                        <input type="number" class="form-control" placeholder="Descuento" [(ngModel)]="prod.discount"
+                                            formControlName="discount">
+                                        <div class="haserror" *ngIf="forma.get('discount').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('duodate').valid}">
+                                        <label>Fecha <a style="color:red">*</a></label>
+                                        <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="prod.duodate"
+                                            formControlName="duodate">
+                                        <div class="haserror" *ngIf="forma.get('duodate').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="margin-left:35px;margin-top:30px">
+                                        <label style="margin-right: 5px;">Recomended:</label>
+                                        <input label="Recomended" formControlName="recomended" [(ngModel)]="prod.recomended"
+                                            class="form-check-input" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="margin-top:30px">
+                                        <label style="margin-right: 5px;">Más Usado:</label>
+                                        <input label="Recomended" formControlName="mostused" [(ngModel)]="prod.mostused"
+                                            class="form-check-input" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Descripción</label>
+                                        <input type="text" class="form-control" placeholder="Descripción"
+                                            formControlName="description" [(ngModel)]="prod.description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('volume').valid}">
+                                        <label>Volume(m3) <a style="color:red">*</a></label>
+                                        <input type="number" class="form-control" placeholder="Volume" [(ngModel)]="prod.volume"
+                                            formControlName="volume">
+                                        <div class="haserror" *ngIf="forma.get('volume').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('weight').valid}">
+                                        <label>Peso(kg) <a style="color:red">*</a></label>
+                                        <input type="number" class="form-control" placeholder="Peso" [(ngModel)]="prod.weight"
+                                            formControlName="weight">
+                                        <div class="haserror" *ngIf="forma.get('weight').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('minstock').valid}">
+                                        <label>Stock Mínimo <a style="color:red">*</a></label>
+                                        <input type="number" class="form-control" placeholder="Peso" [(ngModel)]="prod.minstock"
+                                            formControlName="minstock">
+                                        <div class="haserror" *ngIf="forma.get('minstock').errors?.required">
+                                            Este campo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="file-field">
+                                        <div class="btn btn-secondary btn-sm float-left">
+                                            <input type="file" #file accept='image/*' (change)="preview(file.files);">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" *ngIf="editando">
+                                    <div class="form-group">
+                                        <label>Activo:</label>
+                                        <input label="Activo" formControlName="active" [(ngModel)]="prod.active" class="form-check-input"
+                                            type="checkbox" style="margin-left:6px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn-fill pull-right" (click)="cancel()"><i
+                                    class="material-icons">cancel</i>
+                                Cancelar
+                            </button>
+                            <button type="submit" mat-raised-button [disabled]="!forma.valid" (click)="insert(true)"
+                                class="btn-fill pull-right" style="margin-right:5px;">
+                                <i class="material-icons">done_outline</i>
+                                Aceptar
+                            </button>
+                            <button mat-raised-button type="submit" [disabled]="!forma.valid" *ngIf="!editando" (click)="insert(false)"
+                                class="btn-fill pull-right" style="margin-right:5px;">
+                                <i class="material-icons">add</i>
+                                Agregar
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="../../../assets/img/licores.jpg" alt="..." />
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                            <a href="#">
+                                <img class="avatar border-gray" src="{{(!ischangeImage && prod.image != null)?url+'get-image-product/'+prod.image:prod.image | noimageuser}}"
+                                    alt="..." />
+
+                                <h4 class="title">{{prod.code}}<br />
+                                    <small>{{prod.name}}</small>
+                                </h4>
+                            </a>
+                        </div>
+                        <p class="description text-center">
+                            {{prod.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ngx-loading [show]="showLoading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingformproductTemplate"></ngx-loading>
+        </div>
+    </div>
+</div>

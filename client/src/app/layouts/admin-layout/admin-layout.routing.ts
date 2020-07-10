@@ -30,10 +30,13 @@ import { FormmenuComponent } from "../../pages/menu/formmenu.component";
 import { ListcustomerComponent } from "../../pages/customer/listcustomer.component";
 import { FormcustomerComponent } from "../../pages/customer/formcustomer.component";
 import { ListproductsComponent } from "../../pages/products/listproducts.component";
+import {FormproductComponent} from "../../pages/products/formproduct.component";
 
 
 export const AdminLayoutRoutes: Routes = [
     //  {path: 'dashboard', component: HomeComponent},
+    { path: 'product/new', component: FormproductComponent },
+    { path: 'product/:id', component: FormproductComponent },
     { path: 'products/:page', component: ListproductsComponent },
     { path: 'customer/new', component: FormcustomerComponent },
     { path: 'customer/:id', component: FormcustomerComponent },
