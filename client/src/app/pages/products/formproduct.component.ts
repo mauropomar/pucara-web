@@ -76,10 +76,16 @@ export class FormproductComponent implements OnInit {
           description: new FormControl(''),
           recomended: new FormControl(''),
           mostused: new FormControl(''),
-          duodate:new FormControl('', [Validators.required]),
-          volume:new FormControl('', [Validators.required]),
-          minstock:new FormControl('', [Validators.required]),
-          weight:new FormControl('', [Validators.required]),
+          duodate:new FormControl(''),
+          volume:new FormControl(''),
+          minstock:new FormControl(''),
+          weight:new FormControl(''),
+          tarifa: new FormControl(''),
+          available: new FormControl(''),
+          maxwidth: new FormControl(''),
+          maxlenght: new FormControl(''),
+          minheight: new FormControl(''),
+          caracterist: new FormControl(''),
           active: new FormControl('')
       })
   }

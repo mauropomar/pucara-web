@@ -80,13 +80,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('duodate').valid}">
-                                        <label>Fecha <a style="color:red">*</a></label>
+                                    <div class="form-group">
+                                        <label>Fecha</label>
                                         <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="prod.duodate"
                                             formControlName="duodate">
-                                        <div class="haserror" *ngIf="forma.get('duodate').errors?.required">
-                                            Este campo es requerido.
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -115,33 +112,77 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('volume').valid}">
-                                        <label>Volume(m3) <a style="color:red">*</a></label>
+                                    <div class="form-group">
+                                        <label>Volume(m3)</label>
                                         <input type="number" class="form-control" placeholder="Volume" [(ngModel)]="prod.volume"
                                             formControlName="volume">
-                                        <div class="haserror" *ngIf="forma.get('volume').errors?.required">
-                                            Este campo es requerido.
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('weight').valid}">
-                                        <label>Peso(kg) <a style="color:red">*</a></label>
+                                    <div class="form-group">
+                                        <label>Peso(kg)</label>
                                         <input type="number" class="form-control" placeholder="Peso" [(ngModel)]="prod.weight"
                                             formControlName="weight">
-                                        <div class="haserror" *ngIf="forma.get('weight').errors?.required">
-                                            Este campo es requerido.
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group" [ngClass]="{'has-danger':!forma.get('minstock').valid}">
-                                        <label>Stock Mínimo <a style="color:red">*</a></label>
+                                    <div class="form-group">
+                                        <label>Stock Mínimo</label>
                                         <input type="number" class="form-control" placeholder="Peso" [(ngModel)]="prod.minstock"
                                             formControlName="minstock">
-                                        <div class="haserror" *ngIf="forma.get('minstock').errors?.required">
-                                            Este campo es requerido.
-                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tarifa Arancelaria</label>
+                                        <input type="text" class="form-control" placeholder="Tarifa Arancelaria"
+                                            [(ngModel)]="prod.tarifa" formControlName="tarifa">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Disponibilidad <a style="color:red">*</a></label>
+                                        <input type="number" class="form-control" placeholder="Disponible" [(ngModel)]="prod.available"
+                                            formControlName="available">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Anchura Máxima (mm)</label>
+                                        <input type="number" class="form-control" placeholder="Anchura Máxima"
+                                            [(ngModel)]="prod.maxwidth" formControlName="maxwidth">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Altura Mínima (mm)</label>
+                                        <input type="number" class="form-control" placeholder="Altura Mínima"
+                                            [(ngModel)]="prod.minheight" formControlName="minheight">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Máxima Cantidad (mm)</label>
+                                        <input type="number" class="form-control" placeholder="Máxima Cantidad"
+                                            [(ngModel)]="prod.maxlenght" formControlName="maxlenght">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Características</label>
+                                        <input type="text" class="form-control" placeholder="Características"
+                                            formControlName="caracterist" [(ngModel)]="prod.caracterist">
                                     </div>
                                 </div>
                             </div>
