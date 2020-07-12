@@ -74,6 +74,7 @@ export class FormproductComponent implements OnInit {
           price:new FormControl('', [Validators.required]),
           discount:new FormControl('', [Validators.required]),
           description: new FormControl(''),
+          uom: new FormControl(''),
           recomended: new FormControl(''),
           mostused: new FormControl(''),
           duodate:new FormControl(''),
@@ -162,7 +163,7 @@ export class FormproductComponent implements OnInit {
       this.uploadService.makeFileRequest(url, [], this.file, this.token, 'image')
           .then((result: any) => {
               if (cerrar) {
-                  this.prod.image = result.language.image;
+                  this.prod.image = result.datos.image;
                   this.router.navigate(['home/products/1']);
                   return;
               }
@@ -177,6 +178,8 @@ export class FormproductComponent implements OnInit {
       this.service.getOne(id)
           .subscribe(data => {
               this.prod = data;
+              this.prod.duodate = this.global.getStringDate(data.duodate, 'yy-mm-dd');
+  
           })
   }
 

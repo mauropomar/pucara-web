@@ -67,8 +67,8 @@ function updateProduct(req, res) {
             {name: update.name.toLowerCase()}]
     }).exec((err, prods) => {
         var prod_isset = false;
-        prods.forEach((prodg) => {
-            if (prod && prod._id != prodId)
+        prods.forEach((p) => {
+            if (p && p._id != prodId)
                 prod_isset = true
         });
         if (prod_isset) return res.status(200).send({
@@ -111,7 +111,7 @@ function getProducts(req, res) {
     if (req.params.page) {
         page = req.params.page;
     }
-    var itemsPerPage = 10;
+    var itemsPerPage = 4;
     var query = null;
     if (req.query.active == 'true') {
         query = {active: true}
@@ -133,16 +133,15 @@ function uploadImage(req, res) {
     var prodId = req.params.id;
 
     if (req.files) {
-        var file_path = req.files.flag.path;
+        var file_path = req.files.image.path;
 
         var file_split = file_path.split('\\');
         //   console.log(file_split);
         var file_name = file_split[2];
         var ext_split = file_name.split('\.');
         var file_ext = ext_split[1];
-        console.log(prodId);
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
-            Product.findByIdAndUpdate(prodId, {flag: file_name}, {new: true}, (err, datos) => {
+            Product.findByIdAndUpdate(prodId, {image: file_name}, {new: true}, (err, datos) => {
                 if (err) return res.status(500).send({message: 'Error en la peticion.'});
                 if (!datos) return res.status(404).send({message: 'No se ha podido actualizar.'});
                 return res.status(200).send({datos: datos});

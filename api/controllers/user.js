@@ -1,40 +1,42 @@
 'use strinct'
 
 var User = require('../models/user');
-var bcrypt = require('bcrypt-nodejs');
+//var bcrypt = require('bcrypt-nodejs');
 var jwt = require('../services/jwt');
 var mongoosePaginate = require('mongoose-pagination');
 var fs = require('fs');
 var path = require('path');
+var CryptoJS = require("crypto-js");
+
+secretKey = "YourSecretKeyForEncryption&Descryption";
 
 
 //metodo de login
 function loginUser(req, res) {
     var params = req.body;
     var email = params.email;
-    var password = params.password;
-
-    User.findOne({email: email}, (err, user) => {
-            if (err) return res.status(500).send({message: 'Error de peticion'});
-            if (user) {
-                bcrypt.compare(password, user.password, (err, check) => {
-                    if (check) {
-                        if (params.gettoken) {
-                            //devolver  y generar token
-                            res.status(200).send({
-                                user: user,
-                                token: jwt.createToken(user),
-                            });
-                        }
-                    } else {
-                        return res.status(404).send({message: 'Usuario y/o contraseña incorrecta.'})
-                    }
-                })
-            } else {
-                return res.status(404).send({message: 'El usuario no se ha podido identificar!!!'})
+    var password = params.encrypt_password;
+    User.findOne({ email: email }, (err, user) => {
+        if (err) return res.status(500).send({ message: 'Error de peticion' });
+        if (user) {
+            var passUser = CryptoJS.AES.decrypt(password, secretKey.trim()).toString(CryptoJS.enc.Utf8);
+            var passUserBd = CryptoJS.AES.decrypt(user.password, secretKey.trim()).toString(CryptoJS.enc.Utf8);
+            if (passUser == passUserBd) {
+                if (params.gettoken) {
+                    //devolver  y generar token
+                    res.status(200).send({
+                        user: user,
+                        token: jwt.createToken(user),
+                    });
+                } else {
+                    return res.status(404).send({ message: 'Usuario y/o contraseña incorrecta.' })
+                }
             }
+        } else {
+            return res.status(404).send({ message: 'El usuario no se ha podido identificar!!!' })
         }
-    ).populate('sucursal')
+    }
+    )
 }
 
 //salva los datos de un usuario
@@ -47,33 +49,32 @@ function saveUser(req, res) {
         user.email = params.email;
         user.phone = params.phone;
         user.rol = params.rol;
+        user.password = params.password;
         user.adreess = params.adreess;
         user.image = null;
+        user.active = true;
         User.find({
-            $or: [{email: user.email.toLowerCase()},
-                {username: user.username.toLowerCase()}]
+            $or: [{ email: user.email.toLowerCase() },
+            { username: user.username.toLowerCase() }]
         }).exec((err, users) => {
-                if (err) return res.status(500).send({success: false, message: 'Error en la petición de usuarios.'});
-                if (users && users.length > 1) {
-                    return res.status(200).send({success: false, message: 'El usuario que intentas registrar ya existe.'})
-                } else {
-                    bcrypt.hash(params.password, null, null, (err, hash) => {
-                        user.password = hash;
-                        user.save((err, userStore) => {
-                            if (err) return res.status(500).send({message: 'Error al guardar el usuario'});
-                            if (userStore) {
-                                res.status(200).send({
-                                    user: userStore,
-                                    message: 'El usuario fue registrado con éxito',
-                                    success: true
-                                });
-                            } else {
-                                res.status(404).send({message: 'No se ha registrado el usuario'});
-                            }
+            if (err) return res.status(500).send({ success: false, message: 'Error en la petición de usuarios.' });
+            if (users && users.length > 1) {
+                return res.status(200).send({ success: false, message: 'El usuario que intentas registrar ya existe.' })
+            } else {
+                user.save((err, userStore) => {
+                    if (err) return res.status(500).send({ message: 'Error al guardar el usuario' });
+                    if (userStore) {
+                        res.status(200).send({
+                            user: userStore,
+                            message: 'El usuario fue registrado con éxito',
+                            success: true
                         });
-                    });
-                }
+                    } else {
+                        res.status(404).send({ message: 'No se ha registrado el usuario' });
+                    }
+                });
             }
+        }
         )
     } else {
         res.status(200).send({
@@ -88,8 +89,8 @@ function updatePerfil(req, res) {
     var userId = req.params.id;
     var update = req.body;
     User.find({
-        $or: [{email: update.email.toLowerCase()},
-            {username: update.username.toLowerCase()}]
+        $or: [{ email: update.email.toLowerCase() },
+        { username: update.username.toLowerCase() }]
     }).exec((err, users) => {
         var user_isset = false;
         users.forEach((user) => {
@@ -100,28 +101,26 @@ function updatePerfil(req, res) {
             success: false,
             message: 'El perfil que intentas actualizar ya existe.'
         });
-        bcrypt.hash(update.password, null, null, (err, hash) => {
-            var password = (update.password_anterior != update.password) ? hash : update.password;
-            var user = {
-                name: update.name,
-                username: update.username,
-                email: update.email,
-                image: update.image,
-                adreess:  update.adreess,
-                phone: update.phone,
-                password: password
-            };
-            User.findByIdAndUpdate(userId, user, {new: true}, (err, data) => {
-                if (err) return res.status(500).send({success: false, message: 'Error en la peticion.'});
-                if (!data) return res.status(404).send({
-                    success: false,
-                    message: 'No se ha podido actualizar.'
-                });
-                return res.status(200).send({
-                    user: data,
-                    message: 'El perfil fue actualizado con éxito',
-                    success: true
-                });
+        var user = {
+            name: update.name,
+            username: update.username,
+            email: update.email,
+            image: update.image,
+            adreess: update.adreess,
+            phone: update.phone,
+            password: update.password,
+            active: update.active
+        };
+        User.findByIdAndUpdate(userId, user, { new: true }, (err, data) => {
+            if (err) return res.status(500).send({ success: false, message: 'Error en la peticion.' });
+            if (!data) return res.status(404).send({
+                success: false,
+                message: 'No se ha podido actualizar.'
+            });
+            return res.status(200).send({
+                user: data,
+                message: 'El perfil fue actualizado con éxito',
+                success: true
             });
         });
     });
@@ -134,8 +133,8 @@ function updateUser(req, res) {
     var userId = req.params.id;
     var update = req.body;
     User.find({
-        $or: [{email: update.email.toLowerCase()},
-            {username: update.username.toLowerCase()}]
+        $or: [{ email: update.email.toLowerCase() },
+        { username: update.username.toLowerCase() }]
     }).exec((err, users) => {
         var user_isset = false;
         users.forEach((user) => {
@@ -146,29 +145,26 @@ function updateUser(req, res) {
             success: false,
             message: 'El usuario que intentas actualizar ya existe.'
         });
-        bcrypt.hash(update.password, null, null, (err, hash) => {
-            var password = (update.password_anterior != update.password) ? hash : update.password;
-            var user = {
-                name: update.name,
-                username: update.username,
-                email: update.email,
-                phone: update.phone,
-                rol: update.rol,
-                adreess: update.adreess,
-                image: update.image,
-                password: password
-            };
-            User.findByIdAndUpdate(userId, user, {new: true}, (err, data) => {
-                if (err) return res.status(500).send({success: false, message: 'Error en la peticion.'});
-                if (!data) return res.status(404).send({
-                    success: false,
-                    message: 'No se ha podido actualizar.'
-                });
-                return res.status(200).send({
-                    user: data,
-                    message: 'El usuario fue actualizado con éxito',
-                    success: true
-                });
+        var user = {
+            name: update.name,
+            username: update.username,
+            email: update.email,
+            image: update.image,
+            adreess: update.adreess,
+            phone: update.phone,
+            password: update.password,
+            active: update.active
+        };
+        User.findByIdAndUpdate(userId, user, { new: true }, (err, data) => {
+            if (err) return res.status(500).send({ success: false, message: 'Error en la peticion.' });
+            if (!data) return res.status(404).send({
+                success: false,
+                message: 'No se ha podido actualizar.'
+            });
+            return res.status(200).send({
+                user: data,
+                message: 'El usuario fue actualizado con éxito',
+                success: true
             });
         });
     });
@@ -181,9 +177,9 @@ function getUser(req, res) {
     var userId = req.params.id;
     User.findById(userId, (err, datos) => {
         if (err)
-            return res.status(500).send({message: 'Error en la petición'});
+            return res.status(500).send({ message: 'Error en la petición' });
         if (!datos)
-            return res.status(404).send({message: 'El usuario no existe'});
+            return res.status(404).send({ message: 'El usuario no existe' });
         var array = new Array({
             _id: datos['_id'],
             name: datos['name'],
@@ -193,9 +189,10 @@ function getUser(req, res) {
             adreess: datos['adreess'],
             rol: datos['rol'],
             password: datos['password'],
-            image: datos['image']
+            image: datos['image'],
+            active: datos['active']
         });
-        return res.status(200).send({datos: array});
+        return res.status(200).send({ datos: array });
     });
 }
 
@@ -207,9 +204,13 @@ function getUsers(req, res) {
         page = req.params.page;
     }
     var itemsPerPage = 10;
-    User.find().sort('_id').populate('rol', 'name').paginate(page, itemsPerPage, (err, datos, total) => {
-        if (err) return res.status(500).send({message: 'Error en la peticion'});
-        if (!datos) return res.status(400).send({message: 'No hay usuarios disponibles.'});
+    var query = null;
+    if (req.query.active == 'true') {
+        query = { active: true }
+    }
+    User.find(query).sort('_id').populate('rol', 'name').paginate(page, itemsPerPage, (err, datos, total) => {
+        if (err) return res.status(500).send({ message: 'Error en la peticion' });
+        if (!datos) return res.status(400).send({ message: 'No hay usuarios disponibles.' });
         return res.status(200).send({
             datos,
             total,
@@ -238,16 +239,16 @@ function uploadImage(req, res) {
           }*/
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif' || file_ext == 'jpeg') {
             //Actualizar documento usuario logueado
-            User.findByIdAndUpdate(userId, {image: file_name}, {new: true}, (err, datos) => {
-                if (err) return res.status(500).send({message: 'Error en la peticion.'});
-                if (!datos) return res.status(404).send({message: 'No se ha podido actualizar.'});
-                return res.status(200).send({user: datos});
+            User.findByIdAndUpdate(userId, { image: file_name }, { new: true }, (err, datos) => {
+                if (err) return res.status(500).send({ message: 'Error en la peticion.' });
+                if (!datos) return res.status(404).send({ message: 'No se ha podido actualizar.' });
+                return res.status(200).send({ user: datos });
             })
         } else {
             return removeFilePathUploads(res, file_path, 'Extensión no válida.');
         }
     } else {
-        return res.status(200).send({message: 'No se han subido imagenes.'});
+        return res.status(200).send({ message: 'No se han subido imagenes.' });
     }
 }
 
@@ -258,23 +259,23 @@ function getImageFile(req, res) {
         if (exists) {
             res.sendFile(path.resolve(path_file));
         } else {
-            res.status(200).send({message: 'No existe la imagen...'});
+            res.status(200).send({ message: 'No existe la imagen...' });
         }
     });
 }
 
 function removeFilePathUploads(res, filepath, message) {
     fs.unlink(filepath, (err) => {
-        return res.status(200).send({message: message});
+        return res.status(200).send({ message: message });
     })
 }
 
 function deleteUser(req, res) {
     var userId = req.params.id;
-    User.findOne({'_id': userId}).remove(err => {
+    User.findOne({ '_id': userId }).remove(err => {
         if (err)
-            return res.status(500).send({success: false, message: 'Imposible borrar este usuario.'});
-        return res.status(200).send({success: true, message: 'El usuario ha sido borrado con éxito.'});
+            return res.status(500).send({ success: false, message: 'Imposible borrar este usuario.' });
+        return res.status(200).send({ success: true, message: 'El usuario ha sido borrado con éxito.' });
     })
 }
 

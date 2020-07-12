@@ -3,7 +3,7 @@
 var express = require('express');
 var Controller = require('../controllers/product');
 var multipart = require('connect-multiparty');
-var md_upload = multipart({uploadDir: './uploads/product'});
+var md_upload = multipart({uploadDir: './uploads/products'});
 
 
 var api = express.Router();

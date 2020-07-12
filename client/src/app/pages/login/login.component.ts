@@ -4,6 +4,7 @@ import {LoginService} from "../../services/login.service";
 import {Router} from '@angular/router';
 import {GlobalService} from "../../services/global.service";
 import {LoginModel} from "../../models/login";
+import { CritojsService } from '../../services/critojs.service';
 
 @Component({
     selector: 'app-login',
@@ -14,15 +15,14 @@ export class LoginComponent implements OnInit {
     token;
     message = '';
     identity;
-    user: LoginModel = new class implements LoginModel {
+    login: LoginModel = new class implements LoginModel {
         email: string;
         password: string;
     };
     public showLoading: boolean = false;
 
-    constructor(private loginservice: LoginService,
-                private router: Router,
-                private global: GlobalService) {
+    constructor(private loginservice: LoginService, private router: Router,
+        private critoJs: CritojsService, private global: GlobalService) {
     }
 
     ngOnInit(): void {
@@ -53,7 +53,11 @@ export class LoginComponent implements OnInit {
             return;
         this.message = '';
         this.showLoading = true;
-        this.loginservice.auth(this.user, true)
+        let user = {
+            email:this.login.email,
+            encrypt_password:this.critoJs.encrypt(this.login.password)
+        }
+        this.loginservice.auth(user, true)
             .subscribe((data: any) => {
                 this.identity = data.user;
                 this.token = data.token;

@@ -1,15 +1,15 @@
 @import "../node_modules/material-design-icons-iconfont/dist/material-design-icons.css";
 
-button[type="submit"]{
-    background: #8D011C; /* Old browsers */
-    color: white;
-}
-
 
 .card .header{
     background-image: linear-gradient(#94283D, #94283D, #94283D, #94283D);
     border:1px solid white;
     border-radius: 5px;
+}
+
+.button-filter{
+    background-color: #AC2943;
+    color:white
 }
 
 .modal-header{

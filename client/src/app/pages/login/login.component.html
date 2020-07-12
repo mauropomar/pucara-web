@@ -7,22 +7,22 @@
                 <form #forma="ngForm" (ngSubmit)="onSumit(forma)" novalidate="">
                     <fieldset class="clearfix">
                         <div class="form-group">
-                            <p><span class="fa fa-user"></span>
-                                <input type="text" [(ngModel)]="user.email" class="form-control"
+                            <p><span class="fa fa-login"></span>
+                                <input type="text" [(ngModel)]="login.email" class="form-control"
                                        autofocus
                                        class="fadeIn second"
                                        name="email" placeholder="Correo"
                                        required
                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                                        #email="ngModel"></p>
-                            <!-- JS because of IE support; better: placeholder="Username" -->
+                            <!-- JS because of IE support; better: placeholder="loginname" -->
                         </div>
                         <div class="form-group">
                             <p><span class="fa fa-lock"></span>
                                 <input class="form-control"
                                        type="password"
                                        id="password"
-                                       [(ngModel)]="user.password"
+                                       [(ngModel)]="login.password"
                                        class="fadeIn third"
                                        name="password" placeholder="Contraseña"
                                        minlength="5"

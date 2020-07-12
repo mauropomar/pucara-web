@@ -49,11 +49,16 @@ export class UsersService {
             .pipe(map(data => data['datos']));
     }
 
-    getAll(page = null) {
+    getAll(page = null, active) {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', this.loginService.getToken());
         let url = this.url + 'users/' + page;
-        return this.http.get(url, {headers: headers})
+        let params = new HttpParams({
+            fromObject: {
+                active: active
+            }
+        });
+        return this.http.get(url, {headers: headers, params: params})
             .pipe(map(data => data));
     }
 

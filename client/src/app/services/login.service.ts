@@ -14,7 +14,7 @@ export class LoginService {
         this.url = global.url;
     }
 
-  auth(user:LoginModel, gettoken = null): Observable<any>{
+  auth(user, gettoken = null): Observable<any>{
     if(gettoken != null){
       user['gettoken'] = gettoken;
     }

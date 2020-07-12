@@ -122,19 +122,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="file-field">
-                                        <div class="btn btn-secondary btn-sm float-left">
-                                            <input type="file" #file
-                                                   accept='image/*'
-                                                   (change)="preview(file.files);">
+                                    <div class="col-md-6">
+                                        <div class="file-field">
+                                            <div class="btn btn-secondary btn-sm float-left">
+                                                <input type="file" #file accept='image/*' (change)="preview(file.files);">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="editando">
+                                        <div class="form-group">
+                                            <label>Activo:</label>
+                                            <input label="Activo" formControlName="active" [(ngModel)]="user.active" class="form-check-input"
+                                                type="checkbox" style="margin-left:6px;">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                             <button mat-raised-button type="submit"
-                                    class="btn-fill pull-right"
+                                    class="btn btn-wine btn-fill pull-right"
                                     (click)="cancel()"
                             ><i class="material-icons">cancel</i>
                                 Cancelar
@@ -142,7 +147,7 @@
                             <button type="submit" mat-raised-button
                                     [disabled]="!forma.valid"
                                     (click)="insert(true)"
-                                    class="btn-fill pull-right"
+                                    class="btn btn-wine btn-fill pull-right"
                                     style="margin-right:5px;">
                                 <i class="material-icons">done_outline</i>
                                 Aceptar
@@ -151,7 +156,7 @@
                                     [disabled]="!forma.valid"
                                     *ngIf="!editando"
                                     (click)="insert(false)"
-                                    class="btn-fill pull-right"
+                                    class="btn btn-wine btn-fill pull-right"
                                     style="margin-right:5px;">
                                 <i class="material-icons">add</i>
                                 Agregar

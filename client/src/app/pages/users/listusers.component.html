@@ -16,13 +16,13 @@
                             <div class="col-md-4 text-right">
                                 <button *ngIf="page > 1"  mat-fab
                                         data-toggle="tooltip" data-placement="top" title="Anterior"
-                                        class="button-filter"
+                                        class="button-filter" style="margin-bottom: 15px;"
                                         (click)="previous()">
                                     <i class="material-icons">arrow_back</i>
                                 </button>
                                 <button *ngIf="pages > page" mat-fab
                                         data-placement="top" title="Siguiente"
-                                        class="button-filter"
+                                        class="button-filter" style="margin-bottom: 15px;"
                                         (click)="next()">
                                     <i class="material-icons">arrow_forward</i>
 
@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-    <app-favbutton (addData)="create()"></app-favbutton>
+    <app-favbutton (addData)="create()" (clickActive)="showOnlyActive($event)"></app-favbutton>
     <app-confirmdelete [message]="messagedelete" (deleteEvent)="delete()"></app-confirmdelete>
 </div>
 

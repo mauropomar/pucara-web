@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Router} from '@angular/router';
-import {GlobalService} from "../../services/global.service";
-import {UserModel} from "../../models/user";
-import {UsersService} from "../../services/users.service";
-import {UploadService} from "../../services/upload.service";
-import {LoginService} from "../../services/login.service";
-import {UtilService} from "../../services/util.service";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { GlobalService } from "../../services/global.service";
+import { UserModel } from "../../models/user";
+import { UsersService } from "../../services/users.service";
+import { UploadService } from "../../services/upload.service";
+import { LoginService } from "../../services/login.service";
+import { UtilService } from "../../services/util.service";
 import { CritojsService } from '../../services/critojs.service';
 
 @Component({
@@ -35,13 +35,14 @@ export class FormusersComponent implements OnInit {
         confirm_password: string;
         password_anterior: string;
         image: any;
+        active:boolean;
     };
 
     constructor(private activateRoute: ActivatedRoute, private global: GlobalService,
-                private router: Router, private userService: UsersService,
-                private loginService: LoginService,  private uploadService: UploadService,
-                private util: UtilService, private critoJs:CritojsService) {
-                    
+        private router: Router, private userService: UsersService,
+        private loginService: LoginService, private uploadService: UploadService,
+        private util: UtilService, private critoJs: CritojsService) {
+
         this.url = global.url;
         this.token = this.loginService.getToken();
         this.activateRoute.params.subscribe(params => {
@@ -61,20 +62,20 @@ export class FormusersComponent implements OnInit {
             name: new FormControl('', [Validators.required, Validators.minLength(5)]),
             username: new FormControl('', [Validators.required, Validators.minLength(3)]),
             email: new FormControl('', [Validators.required,
-                Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
-            phone:new FormControl(),
-            adreess:new FormControl(),
-            password:new FormControl('', Validators.required),
-            confirmpassword:new FormControl()
+            Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]),
+            phone: new FormControl(),
+            adreess: new FormControl(),
+            password: new FormControl('', Validators.required),
+            confirmpassword: new FormControl(),
+            active: new FormControl()
         })
         this.forma.controls['password'].setValidators([
             Validators.required
         ])
-         this.forma.controls['confirmpassword'].setValidators([
-             Validators.required,
-             this.noIgual.bind(this.forma)
-         ])
-
+        this.forma.controls['confirmpassword'].setValidators([
+            Validators.required,
+            this.noIgual.bind(this.forma)
+        ])
     }
 
     ngOnInit(): void {
@@ -119,6 +120,7 @@ export class FormusersComponent implements OnInit {
             return;
         }
         this.showLoading = true;
+        this.user.password = this.critoJs.encrypt(this.user.password);
         this.userService.register(this.user)
             .subscribe((data: any) => {
                 this.showLoading = false;
@@ -142,6 +144,7 @@ export class FormusersComponent implements OnInit {
         }
         ;
         this.showLoading = true;
+        this.user.password = this.critoJs.encrypt(this.user.password);
         this.userService.update(this.user)
             .subscribe((data: any) => {
                 this.showLoading = false;
@@ -184,8 +187,9 @@ export class FormusersComponent implements OnInit {
         this.userService.getOne(id)
             .subscribe(data => {
                 this.user = data[0];
-                this.user.confirm_password = data[0].password;
-                this.user.password_anterior = data[0].password;
+                this.user.password = this.critoJs.decrypt(data[0].password);
+                this.user.confirm_password = this.user.password;
+                this.user.password_anterior = this.user.password;
             })
     }
 

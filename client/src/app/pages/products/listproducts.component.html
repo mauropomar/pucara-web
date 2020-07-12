@@ -16,13 +16,12 @@
                             </div>
                             <div class="col-md-4 text-right">
                                 <button *ngIf="page > 1" mat-fab data-toggle="tooltip" data-placement="top" title="Anterior"
-                                    class="button-filter" (click)="previous()">
+                                    class="button-filter" style="margin-bottom: 15px;" (click)="previous()">
                                     <i class="material-icons">arrow_back</i>
                                 </button>
-                                <button *ngIf="pages > page" mat-fab data-placement="top" title="Siguiente" class="button-filter"
-                                    (click)="next()">
+                                <button *ngIf="pages > page" mat-fab data-placement="top" title="Siguiente"
+                                     class="button-filter" style="margin-bottom: 15px;" (click)="next()">
                                     <i class="material-icons">arrow_forward</i>
-
                                 </button>
                             </div>
                         </div>
@@ -38,9 +37,12 @@
                             <tbody>
                                 <ng-container *ngFor="let item of products">
                                     <tr>
-                                        <td><img width="50" height="50" src="{{url+'get-image-product/'+item.flag | noimageuser}}"
+                                        <td><img width="50" height="50" src="{{url+'get-image-product/'+item.image | noimageuser}}"
                                                 alt="..."></td>
-                                        <td>{{item.code}}</td>
+                                        <td>
+                                            <h5>{{item.code}}</h5>
+                                            {{item.uom}}
+                                        </td>
                                         <td>{{item.name}}</td>
                                         <td>{{item.price}}</td>
                                         <td class="td-actions text-right">

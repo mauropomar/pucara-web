@@ -9,4 +9,5 @@ export interface UserModel {
     confirm_password:string;
     password_anterior:string;
     image:any;
+    active:boolean;
 }

@@ -22,6 +22,7 @@ export class ListusersComponent implements OnInit {
     public total;
     public nextpage;
     public prevpage;
+    public active:boolean = true;
 
     constructor(private service: UsersService,
                 public global: GlobalService,
@@ -61,7 +62,7 @@ export class ListusersComponent implements OnInit {
     }
 
     getUsers(page) {
-        this.service.getAll(page)
+        this.service.getAll(page, this.active)
             .subscribe(data => {
                 this.users = data['datos'];
                 this.total = data['total'];
@@ -111,5 +112,15 @@ export class ListusersComponent implements OnInit {
     next() {
         this.router.navigate(['home/users', this.nextpage]);
     }
+
+    showOnlyActive($event: boolean) {
+        this.active = $event;
+        this.service.getAll(this.page, this.active)
+          .subscribe(data => {
+            this.users = data['datos'];
+            this.total = data['total'];
+            this.pages = data['pages'];
+          })
+      }
 
 }

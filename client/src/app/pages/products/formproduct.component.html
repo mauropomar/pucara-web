@@ -48,12 +48,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>UOM<a style="color:red">*</a></label>
-                                        <select [(ngModel)]="prod.uom" class="form-control" (change)="prod.uom=$event.target.value"
+                                        <select [(ngModel)]="prod.uom" formControlName="uom" class="form-control" (change)="prod.uom=$event.target.value"
                                             placeholder="Uom" name="Uom" required>
                                             <option value="">seleccione uom</option>
-                                            <option [value]="1">KM12WE</option>
-                                            <option [value]="2">KM12WER</option>
-                                            <option [value]="3">KM12TSER</option>
+                                            <option value="Ud">Ud</option>
+                                            <option value="Caja">Caja</option>
                                         </select>
                                     </div>
                                 </div>
@@ -202,17 +201,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn-fill pull-right" (click)="cancel()"><i
+                            <button mat-raised-button type="submit" class="btn btn-wine btn-fill pull-right" (click)="cancel()"><i
                                     class="material-icons">cancel</i>
                                 Cancelar
                             </button>
                             <button type="submit" mat-raised-button [disabled]="!forma.valid" (click)="insert(true)"
-                                class="btn-fill pull-right" style="margin-right:5px;">
+                                class="btn btn-wine btn-fill pull-right" style="margin-right:5px;">
                                 <i class="material-icons">done_outline</i>
                                 Aceptar
                             </button>
                             <button mat-raised-button type="submit" [disabled]="!forma.valid" *ngIf="!editando" (click)="insert(false)"
-                                class="btn-fill pull-right" style="margin-right:5px;">
+                                class="btn btn-wine btn-fill pull-right" style="margin-right:5px;">
                                 <i class="material-icons">add</i>
                                 Agregar
                             </button>

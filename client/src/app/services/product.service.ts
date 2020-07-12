@@ -39,10 +39,9 @@ export class ProductService {
             }));
     }
 
-    getAll(active) {
+    getAll(page, active) {
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', this.loginService.getToken());
-        let page = 1;
         let url = this.url + 'products/' + page;
         let params = new HttpParams({
             fromObject: {
@@ -50,7 +49,7 @@ export class ProductService {
             }
         });
         return this.http.get(url, {headers: headers, params: params})
-            .pipe(map(data => data['datos']));
+            .pipe(map(data => data));
     }
 
     getOne(id) {

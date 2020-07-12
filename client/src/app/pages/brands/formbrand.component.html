@@ -46,25 +46,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit"
-                                    class="btn-fill pull-right"
+                            <button mat-raised-button type="button"
+                                    class="btn btn-wine btn-fill pull-right"
                                     (click)="cancel()"
                             ><i class="material-icons">cancel</i>
                                 Cancelar
                             </button>
-                            <button type="submit" mat-raised-button type="submit"
+                            <button mat-raised-button type="submit"
                                     [disabled]="!forma.valid"
                                     (click)="insert(true)"
-                                    class="btn-fill pull-right"
+                                    class="btn btn-wine btn-fill pull-right"
                                     style="margin-right:5px;">
                                 <i class="material-icons">done_outline</i>
                                 Aceptar
                             </button>
                             <button mat-raised-button type="submit"
+                                    color="primary"
                                     [disabled]="!forma.valid"
                                     *ngIf="!editando"
                                     (click)="insert(false)"
-                                    class="btn-fill pull-right m"
+                                    class="btn btn-wine btn-fill pull-right"
                                     style="margin-right:5px;">
                                 <i class="material-icons">add</i>
                                 Agregar
