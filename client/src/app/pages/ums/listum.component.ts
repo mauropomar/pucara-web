@@ -1,26 +1,32 @@
-import {Component, OnInit} from '@angular/core';
-import {UmService} from "../../services/um.service";
-import {GlobalService} from "../../services/global.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {UtilService} from "../../services/util.service";
+import { Component, OnInit } from '@angular/core';
+import { UmService } from "../../services/um.service";
+import { GlobalService } from "../../services/global.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UtilService } from "../../services/util.service";
 
 declare var $: any;
 @Component({
-  selector: 'app-listum',
-  templateUrl: './listum.component.html',
-  styleUrls: ['./listum.component.css']
+    selector: 'app-listum',
+    templateUrl: './listum.component.html',
+    styleUrls: ['./listum.component.css']
 })
 export class ListumComponent implements OnInit {
 
-  public messagedelete: string = "Esta seguro que desea eliminar la unidad de medida seleccionada?"
+    public messagedelete: string = "Esta seguro que desea eliminar la unidad de medida seleccionada?"
     public ums: any = [];
     public rolselect: any = [];
     public url: string;
+    public pages;
+    public page;
+    public total;
+    public nextpage;
+    public prevpage;
+    public active: boolean = true;
 
     constructor(private service: UmService, private global: GlobalService,
-                private router: Router,
-                private activatedRoute: ActivatedRoute,
-                private util: UtilService) {
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private util: UtilService) {
         this.url = this.global.url;
     }
 
@@ -37,14 +43,28 @@ export class ListumComponent implements OnInit {
 
     actualPage() {
         this.activatedRoute.params.subscribe(params => {
-            this.getAll(true);
+            let page = +params['page'];
+            this.page = page;
+            if (!page) {
+                page = 1;
+            } else {
+                this.nextpage = page + 1;
+                this.prevpage = page - 1;
+                if (this.prevpage <= 0) {
+                    this.prevpage = 1;
+                }
+            }
+            this.page = page;
+            this.getAll(page);
         })
     }
 
-    getAll(active) {
-        this.service.getAll(active)
+    getAll(page) {
+        this.service.getAll(page, this.active)
             .subscribe(data => {
-                this.ums = data;
+                this.ums = data['datos'];
+                this.total = data['total'];
+                this.pages = data['pages'];
             })
     }
 
@@ -84,9 +104,20 @@ export class ListumComponent implements OnInit {
     }
 
     showOnlyActive($event: boolean) {
-        this.service.getAll($event)
+        this.active = $event;
+        this.service.getAll(this.page, this.active)
             .subscribe(data => {
-                this.ums = data;
+                this.ums = data['datos'];
+                this.total = data['total'];
+                this.pages = data['pages'];
             })
+    }
+
+    previous() {
+        this.router.navigate(['home/ums', this.prevpage]);
+    }
+
+    next() {
+        this.router.navigate(['home/ums', this.nextpage]);
     }
 }
