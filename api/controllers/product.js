@@ -111,7 +111,7 @@ function getProducts(req, res) {
     if (req.params.page) {
         page = req.params.page;
     }
-    var itemsPerPage = 4;
+    var itemsPerPage = 20;
     var query = null;
     if (req.query.active == 'true') {
         query = {active: true}

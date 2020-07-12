@@ -16,6 +16,12 @@ export class ListcustomerComponent implements OnInit {
   public customers: any = [];
   public customerselect: any = [];
   public url: string;
+  public pages;
+  public page;
+  public total;
+  public nextpage;
+  public prevpage;
+  public active:boolean = true;
 
   constructor(private service: CustomerService, private global: GlobalService,
               private router: Router,
@@ -36,15 +42,29 @@ export class ListcustomerComponent implements OnInit {
   }
 
   actualPage() {
-      this.activatedRoute.params.subscribe(params => {
-          this.getAll(true);
-      })
+    this.activatedRoute.params.subscribe(params => {
+      let page = +params['page'];
+      this.page = page;
+      if (!page) {
+        page = 1;
+      } else {
+        this.nextpage = page + 1;
+        this.prevpage = page - 1;
+        if (this.prevpage <= 0) {
+          this.prevpage = 1;
+        }
+      }
+      this.page = page;
+      this.getAll(page);
+    })
   }
 
-  getAll(active) {
-      this.service.getAll(active)
+  getAll(page) {
+      this.service.getAll(page, this.active)
           .subscribe(data => {
-              this.customers = data;
+            this.customers = data['datos'];
+            this.total = data['total'];
+            this.pages = data['pages'];
           })
   }
 
@@ -83,10 +103,22 @@ export class ListcustomerComponent implements OnInit {
       }
   }
 
-  showOnlyActive(active) {
-      this.service.getAll(active)
-          .subscribe(data => {
-              this.customers = data;
-          })
+  showOnlyActive($event: boolean) {
+    this.active = $event;
+    this.service.getAll(this.page, this.active)
+      .subscribe(data => {
+        this.customers = data['datos'];
+        this.total = data['total'];
+        this.pages = data['pages'];
+      })
   }
+
+  previous() {
+    this.router.navigate(['home/customers', this.prevpage]);
+  }
+
+  next() {
+    this.router.navigate(['home/customers', this.nextpage]);
+  }
+
 }

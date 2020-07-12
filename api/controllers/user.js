@@ -203,7 +203,7 @@ function getUsers(req, res) {
     if (req.params.page) {
         page = req.params.page;
     }
-    var itemsPerPage = 10;
+    var itemsPerPage = 15;
     var query = null;
     if (req.query.active == 'true') {
         query = { active: true }
