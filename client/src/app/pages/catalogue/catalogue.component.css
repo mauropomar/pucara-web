@@ -1,7 +1,7 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 250px;
-    max-height: 260px;
+    height: 230px;
     margin: auto;
     text-align: center;
     font-family: arial;
@@ -10,14 +10,14 @@
   }
 
   .card:hover{
-    border:2px solid #8D011C;
+    border:2px solid grey;
     cursor: pointer;
     max-height: 260px;
   }
 
   img{
     width: 200px;
-    height: 230px;
+    height: 170px;
   }
   
   .price {
@@ -30,7 +30,7 @@
     outline: 0;
     padding: 12px;
     color: white;
-    background-color: #8D011C;
+    background-color: grey;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -41,13 +41,28 @@
     opacity: 0.7;
   }
 
-  mat-icon {
+  .cart-shop {
        position: absolute;
-       top: 5px;
-       right: 18px;
+       top: 8px;
+       color:gray;
+       left: 20px;
        height: 100%;
-       color:#8D011C
    }
+
+   .price {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: 100%;
+    font-size: 12px;
+}
+
+.text-name{
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color:gray;
+}
 
    
    
