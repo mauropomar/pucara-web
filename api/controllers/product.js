@@ -1,8 +1,6 @@
 'use strinct'
 
-var bcrypt = require('bcrypt-nodejs');
-var jwt = require('../services/jwt');
-var mongoosePaginate = require('mongoose-pagination');
+
 var fs = require('fs');
 var path = require('path');
 

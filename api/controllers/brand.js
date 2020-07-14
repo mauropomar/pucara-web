@@ -75,7 +75,7 @@ function getBrands(req, res) {
     if (req.params.page) {
         page = req.params.page;
     }
-    var itemsPerPage = 10;
+    var itemsPerPage = 15;
     var query = null;
     if (req.query.active == 'true') {
         query = {active: true}
@@ -84,7 +84,9 @@ function getBrands(req, res) {
         if (err) return res.status(500).send({message: 'Error en la peticion'});
         if (!datos) return res.status(400).send({message: 'No hay marcas disponibles.'});
         return res.status(200).send({
-            datos: datos
+            datos: datos,
+            total,
+            pages: Math.ceil(total / itemsPerPage)
         });
     });
 }

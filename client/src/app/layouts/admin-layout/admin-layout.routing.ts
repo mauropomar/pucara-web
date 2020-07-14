@@ -31,10 +31,12 @@ import { ListcustomerComponent } from "../../pages/customer/listcustomer.compone
 import { FormcustomerComponent } from "../../pages/customer/formcustomer.component";
 import { ListproductsComponent } from "../../pages/products/listproducts.component";
 import {FormproductComponent} from "../../pages/products/formproduct.component";
+import {CatalogueComponent} from "../../pages/catalogue/catalogue.component";
 
 
 export const AdminLayoutRoutes: Routes = [
-    //  {path: 'dashboard', component: HomeComponent},
+    {path: 'dashboard', component: HomeComponent},
+    { path: 'catalogues/:page', component: CatalogueComponent },
     { path: 'product/new', component: FormproductComponent },
     { path: 'product/:id', component: FormproductComponent },
     { path: 'products/:page', component: ListproductsComponent },

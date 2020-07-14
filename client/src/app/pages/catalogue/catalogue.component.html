@@ -1,0 +1,18 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()">
+            <div class="row">
+                <div class="col-md-2" *ngFor="let item of prods">
+                    <div class="card" style="margin-bottom:10px">
+                        <div class="card-image" style="cursor:pointer">
+                            <mat-icon class="material-icons">shopping_cart</mat-icon>
+                        </div>
+                        <img src="{{url+'get-image-product/'+item.image | noimageuser}}" alt="{{item.name}}" style="width:100%">
+                        <p>{{item.name}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

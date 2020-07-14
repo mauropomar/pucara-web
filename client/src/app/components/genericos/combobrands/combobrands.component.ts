@@ -24,9 +24,9 @@ export class CombobrandsComponent implements OnInit {
   }
 
   getAll() {
-    this.service.getAll(true)
+    this.service.getAll(1,true)
       .subscribe(data => {
-        this.data = data;
+        this.data = data['datos'];
       })
   }
 

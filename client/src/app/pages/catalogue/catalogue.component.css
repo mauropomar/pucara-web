@@ -1,0 +1,53 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 250px;
+    max-height: 260px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    border-radius: 4px;
+    border:1px solid transparent;
+  }
+
+  .card:hover{
+    border:2px solid #8D011C;
+    cursor: pointer;
+    max-height: 260px;
+  }
+
+  img{
+    width: 200px;
+    height: 230px;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #8D011C;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
+
+  mat-icon {
+       position: absolute;
+       top: 5px;
+       right: 18px;
+       height: 100%;
+       color:#8D011C
+   }
+
+   
+   

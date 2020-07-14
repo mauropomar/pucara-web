@@ -38,10 +38,9 @@ export class BrandService {
         }));
   }
 
-  getAll(active) {
+  getAll(page, active) {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', this.loginService.getToken());
-    let page = 1;
     let url = this.url + 'brands/'+page;
     let params = new HttpParams({
       fromObject: {
@@ -49,7 +48,7 @@ export class BrandService {
       }
     });
     return this.http.get(url, {headers: headers, params:params})
-        .pipe(map(data => data['datos']));
+        .pipe(map(data => data));
   }
 
   getOne(id) {

@@ -1,9 +1,5 @@
 'use strinct'
 
-var path = require('path');
-var fs = require('fs');
-var moment = require('moment');
-var mongoosePaginate = require('mongoose-pagination');
 
 var Category = require('../models/category_customer');
 
